@@ -1,4 +1,4 @@
-<aside class="z-20 hidden md:block flex-shrink-0 transition-all duration-300 bg-white"
+<aside class="z-20 hidden md:block flex-shrink-0 transition-all duration-300  "
     :class="isSidebarCollapsed ? 'w-20' : 'w-[233px]'">
     <div class="py-4 h-full overflow-y-auto bg-white  text-gray-500 dark:text-gray-400">
         <div class="flex items-center justify-center space-x-3 mt-4">
@@ -11,7 +11,7 @@
 
         <div class="mt-10">
             <ul class="mt-2">
-                <li class="relative font-medium py-3 px-7 flex items-center gap-3 hover:text-purple-600 {{ request()->is('/') ? 'bg-gradient-to-r from-purple-100 to-transparent text-purple-600 font-semibold' : 'text-blue-500' }}"
+                <li class="relative font-medium py-3 px-7 flex items-center gap-3 hover:text-gray-50 {{ request()->is('/') ? 'bg-gradient-to-r from-[#004549] to-[#9ab59f] text-white font-semibold' : 'text-blue-500' }}"
                     :class="{ 'justify-center': isSidebarCollapsed }">
                     <a class="flex items-center text-sm  " href="{{ url('') }}">
                         <i class="fa-solid fa-grid-2 text-xl"></i>
