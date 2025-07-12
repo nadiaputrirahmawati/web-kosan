@@ -5,7 +5,9 @@
     <h1 class="text-sm font-medium"><a href="/owner/room">Kamar /</a> <span class="font-bold"> Detail Kamar</span></h1>
     <h1 class="text-primary font-extrabold text-xl mb-4">Detail Kamar Kos</h1>
     <div class="bg-white shadow-sm rounded-xl p-5">
-        <h1 class="text-sm font-semibold text-gray-800 mt-2 bg-orange-50 border-orange-400 border px-3 py-1 text-center rounded-lg w-3/12">Informasi Kamar </h1>
+        <h1
+            class="text-sm font-semibold text-gray-800 mt-2 bg-orange-50 border-orange-400 border px-3 py-1 text-center rounded-lg w-3/12">
+            Informasi Kamar </h1>
         <table class="table-auto w-full text-neutral text-sm mt-3">
             <tbody>
                 <tr>
@@ -25,7 +27,21 @@
                 </tr>
             </tbody>
         </table>
+        <div>
+            @if ($room->galleries->isNotEmpty())
+                <div class="flex space-x-4">
+                    @forelse ($room->galleries as $gallery)
+                        <img src="{{ asset('storage/' . $gallery->image_url) }}" class="w-32 object-cover rounded"
+                            alt="Foto Kamar">
+                    @empty
+                        <p class="text-sm text-gray-400 italic">Belum ada foto kamar</p>
+                    @endforelse
+                </div>
+            @else
+                <p class="text-sm text-gray-400 italic">Belum ada foto kamar</p>
+            @endif
 
+        </div>
         <div class="flex space-x-3 justify-between mt-3">
             <div class="flex">
                 <div>
@@ -69,7 +85,9 @@
             </div>
         </div>
 
-        <h1 class="text-sm font-semibold text-gray-800 mt-4 bg-red-50 px-3 py-1 border-red-400 border text-center rounded-lg w-3/12">Aturan Kos</h1>
+        <h1
+            class="text-sm font-semibold text-gray-800 mt-4 bg-red-50 px-3 py-1 border-red-400 border text-center rounded-lg w-3/12">
+            Aturan Kos</h1>
         @if (!empty($room->regulation))
             <div class="mb-4 mt-2">
                 <ul class="list-disc list-inside text-gray-700">
@@ -83,7 +101,9 @@
                 </ul>
             </div>
         @endif
-        <h1 class="text-sm font-semibold text-gray-800 mt-2 bg-orange-50 border-orange-400 border px-3 py-1 text-center rounded-lg w-3/12">Fasilitas Umum</h1>
+        <h1
+            class="text-sm font-semibold text-gray-800 mt-2 bg-orange-50 border-orange-400 border px-3 py-1 text-center rounded-lg w-3/12">
+            Fasilitas Umum</h1>
         @if (!empty($room->public_facility))
             <div class="mb-4 mt-2">
                 <ul class="list-disc list-inside text-gray-700">
@@ -98,7 +118,9 @@
                 </ul>
             </div>
         @endif
-        <h1 class="text-sm font-semibold text-gray-800 mt-2 bg-yellow-50 border-yellow-400 border px-3 py-1 text-center rounded-lg w-3/12">Fasilitas Kamar</h1>
+        <h1
+            class="text-sm font-semibold text-gray-800 mt-2 bg-yellow-50 border-yellow-400 border px-3 py-1 text-center rounded-lg w-3/12">
+            Fasilitas Kamar</h1>
         @if (!empty($room->room_facility))
             <div class="mb-4 mt-2">
                 <ul class="list-disc list-inside text-gray-700">

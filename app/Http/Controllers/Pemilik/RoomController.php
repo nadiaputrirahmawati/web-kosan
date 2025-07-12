@@ -11,8 +11,9 @@ class RoomController extends Controller
 {
     public function index()
     {
-        $rooms = Rooms::with('galleries')->get();
-        return view('pemilik.room.index', compact('rooms'));
+        $Room = Rooms::with('galleries')->get();
+        // dd($Room);
+        return view('pemilik.room.index', compact('Room'));
     }
 
 
@@ -66,7 +67,7 @@ class RoomController extends Controller
 
     public function show($id)
     {
-        $room = Rooms::with('user') // relasi pemilik
+        $room = Rooms::with('user', 'galleries') // relasi pemilik
             ->where('room_id', $id)
             ->firstOrFail();
 
