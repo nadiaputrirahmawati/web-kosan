@@ -12,11 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+           $table->uuid('user_id')->primary();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('no_ktp')->unique()->m;
+            $table->bigInteger('npwp')->nullable();
+            $table->enum('gender', ['perempuan', 'laki laki'])->nullable();
+            $table->date('tgl_lahir')->nullable();
+            $table->text('address')->nullable();
+            $table->enum('status', ['menikah', 'belum menikah'])->nullable();
             $table->string('password');
+            $table->enum('role', ['admin', 'penghuni', 'pemilik']);
+            $table->string('phone_number')->nullable();
+            $table->string('profile_picture')->nullable();
+            $table->string('ktp_picture')->nullable();
+            $table->string('ktp_picture_person')->nullable();
+            $table->enum('status_verification', ['pending', 'verified', 'reject'])->nullable();
+            $table->text('rejection_feedback')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

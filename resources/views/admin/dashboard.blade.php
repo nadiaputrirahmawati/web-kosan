@@ -1,4 +1,4 @@
-@extends('layout.index')
+@extends('layout.admin')
 @section('content')
     <div class="flex md:flex-row flex-col lg:space-x-4 space-x-0">
         <div class="lg:w-8/12 w-full ">

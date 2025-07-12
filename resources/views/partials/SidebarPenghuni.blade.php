@@ -1,17 +1,17 @@
 <aside class="z-20 hidden md:block flex-shrink-0 transition-all duration-300  "
     :class="isSidebarCollapsed ? 'w-20' : 'w-[233px]'">
-    <div class="py-4 h-full overflow-y-auto bg-white  text-gray-500 dark:text-gray-400">
+    <div class="py-2 h-full overflow-y-auto bg-white  text-gray-500 dark:text-gray-400">
         <div class="flex items-center justify-center space-x-3 mt-4">
-            <img src="{{ asset('img/image.png') }}" alt="" class="w-10">
-            <span x-show="!isSidebarCollapsed" class="text-2xl font-medium text-gray-800">Base</span>
+            <img src="{{ asset('img/simcard.png') }}" alt="" class="w-[120px]">
+            {{-- <span x-show="!isSidebarCollapsed" class="text-2xl font-medium text-gray-800">Base</span> --}}
         </div>
-        <div class="flex justify-center mt-2">
+        {{-- <div class="flex justify-center mt-2">
             <h1 x-show="isSidebarCollapsed" class="text-2xl font-medium text-gray-800">Base</h1>
-        </div>
+        </div> --}}
 
-        <div class="mt-10">
+        <div class="mt-3">
             <ul class="mt-2">
-                <li class="relative font-medium py-3 px-7 flex items-center gap-3 hover:text-gray-50 {{ request()->is('/') ? 'bg-gradient-to-r from-[#004549] to-[#9ab59f] text-white font-semibold' : 'text-blue-500' }}"
+                <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('penghuni/dashboard') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold hover:bg-gradient-to-r from-[#def3d3] to-[#e2f1e5]' }}"
                     :class="{ 'justify-center': isSidebarCollapsed }">
                     <a class="flex items-center text-sm  " href="{{ url('') }}">
                         <i class="fa-solid fa-grid-2 text-xl"></i>
@@ -20,7 +20,7 @@
                 </li>
             </ul>
             <ul class="mt-2">
-                <li class="relative font-medium py-3 px-7 flex items-center gap-3 hover:text-purple-600 {{ request()->is('/product') ? 'bg-gradient-to-r from-purple-100 to-transparent text-purple-600 font-semibold' : 'text-gray-500' }}"
+                <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('penghsuni/dashboard') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary hover:font-semibold' }}"
                     :class="{ 'justify-center': isSidebarCollapsed }">
                     <a class="flex items-center text-sm  " href="{{ url('') }}">
                         <i class="fas fa-tags text-xl"></i>
@@ -29,7 +29,7 @@
                 </li>
             </ul>
             <ul class="mt-2">
-                <li class="relative font-medium py-3 px-7 flex items-center gap-3 hover:text-purple-600 {{ request()->is('/product') ? 'bg-gradient-to-r from-purple-100 to-transparent text-purple-600 font-semibold' : 'text-gray-500' }}"
+                <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('/product') ? 'bg-gradient-to-r from-purple-100 to-transparent  font-semibold' : 'text-primary hover:font-semibold' }}"
                     :class="{ 'justify-center': isSidebarCollapsed }">
                     <a class="flex items-center text-sm  " href="{{ url('') }}">
                         <i class="fa-solid fa-chart-simple text-xl"></i>
@@ -38,7 +38,7 @@
                 </li>
             </ul>
             <ul class="mt-2">
-                <li class="relative font-medium py-3 px-7 flex items-center gap-3 hover:text-purple-600 {{ request()->is('/product') ? 'bg-gradient-to-r from-purple-100 to-transparent text-purple-600 font-semibold' : 'text-gray-500' }}"
+                <li class="relative font-medium py-3 px-7 flex items-center gap-3 {{ request()->is('/product') ? 'bg-gradient-to-r from-purple-100 to-transparent  font-semibold' : 'text-primary hover:font-semibold' }}"
                     :class="{ 'justify-center': isSidebarCollapsed }">
                     <a class="flex items-center text-sm  " href="{{ url('') }}">
                         <i class="fas fa-cubes text-xl"></i>
