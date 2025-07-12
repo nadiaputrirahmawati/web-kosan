@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Pemilik\GalleryController;
 use App\Http\Controllers\Pemilik\PemilikController;
 use App\Http\Controllers\Pemilik\RoomController;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +16,8 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
      Route::get('room/create', [RoomController::class, 'create'])->name('rooms.create');
      Route::post('room', [RoomController::class, 'store'])->name('rooms.store');
      Route::get('room/{id}/show', [RoomController::class, 'show'])->name('rooms.show');
-
+     Route::get('room/{id}/gallery', [GalleryController::class, 'index'])->name('rooms.gallery');
+     Route::post('room/{id}/gallery', [GalleryController::class, 'store'])->name('rooms.gallery.store');
 });
 
 ?>

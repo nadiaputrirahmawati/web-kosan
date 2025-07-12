@@ -56,4 +56,9 @@ class Rooms extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function galleries()
+    {
+        return $this->hasMany(Gallery::class, 'room_id', 'room_id');
+    }
 }

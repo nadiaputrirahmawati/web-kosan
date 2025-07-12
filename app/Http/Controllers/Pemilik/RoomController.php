@@ -11,9 +11,10 @@ class RoomController extends Controller
 {
     public function index()
     {
-        $Room = Rooms::all();
-        return view('pemilik.room.index', compact('Room'));
+        $rooms = Rooms::with('galleries')->get();
+        return view('pemilik.room.index', compact('rooms'));
     }
+
 
     public function create()
     {
@@ -51,7 +52,7 @@ class RoomController extends Controller
             'type'           => $validated['type'],
             'deposit_amount' => $validated['deposit_amount'] ?? 0,
             'room_facility'  => $validated['room_facility'] ?? null,
-            'public_facility'=> $validated['public_facility'] ?? null,
+            'public_facility' => $validated['public_facility'] ?? null,
             'address'        => $validated['address'],
             'description'    => $validated['description'] ?? null,
             'regulation'     => $validated['regulation'] ?? [], // array → JSON
@@ -59,7 +60,7 @@ class RoomController extends Controller
         ]);
 
         return redirect()
-            ->route('rooms.index')
+            ->route('rooms.gallery', ['id' => Rooms::latest()->first()->room_id])
             ->with('success', 'Kamar berhasil ditambahkan.');
     }
 
