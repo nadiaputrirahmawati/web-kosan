@@ -16,9 +16,7 @@ Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard')->middleware(['auth', 'role:admin']);
 
-Route::get('/owner/dashboard', function () {
-    return view('owner.dashboard');
-})->name('owner.dashboard')->middleware(['auth', 'role:owner']);
+
 
 Route::get('/user/dashboard', function () {
     return view('user.dashboard');
@@ -31,12 +29,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     })->name('admin.users');
 });
 
-// Owner routes - khusus untuk owner
-Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
-    Route::get('/kost', function () {
-        return view('owner.kost');
-    })->name('owner.properties');
-});
+
+
 
 // User routes - khusus untuk user
 Route::prefix('user')->middleware(['auth', 'role:user'])->group(function () {

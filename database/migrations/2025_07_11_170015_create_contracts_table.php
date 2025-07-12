@@ -20,6 +20,8 @@ return new class extends Migration
             $table->enum('status', ['aktif', 'selesai', 'batal']);
             $table->string('signed_pdf')->nullable();
             $table->string('signature')->nullable();
+            $table->bigInteger('deposit_amount')->nullable();
+            $table->enum('deposit_status', ['pending', 'completed', 'refund'])->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');

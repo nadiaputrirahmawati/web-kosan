@@ -21,8 +21,6 @@ return new class extends Migration
             $table->date('tgl_lahir')->nullable();
             $table->text('address')->nullable();
             $table->enum('status', ['menikah', 'belum menikah'])->nullable();
-            $table->string('password');
-            $table->enum('role', ['admin', 'penghuni', 'pemilik']);
             $table->string('phone_number')->nullable();
             $table->string('profile_picture')->nullable();
             $table->string('ktp_picture')->nullable();

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('status', ['kosong', 'terisi', 'booking'])->default('kosong');
             $table->enum('type', ['campur', 'putri', 'putra']);
             $table->bigInteger('price');
+            $table->bigInteger('deposit_amount');
             $table->json('facility')->nullable();
             $table->json('regulation')->nullable();
             $table->text('address');
