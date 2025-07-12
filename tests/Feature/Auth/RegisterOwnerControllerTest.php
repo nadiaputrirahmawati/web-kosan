@@ -3,7 +3,8 @@
 namespace Tests\Feature\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class RegisterOwnerControllerTest extends TestCase
@@ -38,7 +39,6 @@ class RegisterOwnerControllerTest extends TestCase
             'name' => 'Test Owner',
             'email' => 'owner@example.com',
             'password' => 'password',
-            'password_confirmation' => 'password'
         ]);
 
         $response->assertSessionHasNoErrors();
@@ -64,7 +64,6 @@ class RegisterOwnerControllerTest extends TestCase
             'name' => '', // Nama dikosongkan
             'email' => 'owner@example.com',
             'password' => 'password',
-            'password_confirmation' => 'password',
         ]);
 
         // Pastikan session memiliki error untuk field 'name'
@@ -82,28 +81,36 @@ class RegisterOwnerControllerTest extends TestCase
     {
         $response = $this->post('/owner/register', [
             'name' => 'Test Owner',
-            'email' => 'not-an-email', // Email tidak valid
+            'email' => 'not-an-email',
             'password' => 'password',
-            'password_confirmation' => 'password',
         ]);
 
         $response->assertSessionHasErrors('email');
     }
 
     /**
-     * Test validasi gagal jika password tidak cocok.
-     *
+     * Test gagal jika email tidak unique
+     * 
      * @return void
      */
-    public function test_validation_fails_if_passwords_do_not_match(): void
+    public function test_it_requires_unique_email(): void
     {
-        $response = $this->post('/owner/register', [
-            'name' => 'Test Owner',
-            'email' => 'owner@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'wrong-password',
+        User::create([
+            'name' => 'Existing User',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'admin',
         ]);
 
-        $response->assertSessionHasErrors('password');
+        $adminData = [
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => 'password123',
+        ];
+
+        $response = $this->post(route('owner.register'), $adminData);
+
+        $response->assertSessionHasErrors(['email']);
+        $this->assertDatabaseMissing('users', ['name' => 'Admin User']);
     }
 }
