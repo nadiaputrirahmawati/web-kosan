@@ -7,8 +7,7 @@
     <title>SimKos-Pemilik</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
-        rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/all.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     @vite('resources/css/app.css')
@@ -16,7 +15,7 @@
 
     <style>
         * {
-            font-family: "Plus Jakarta Sans", sans-serif;
+             font-family: "Nunito", sans-serif;
         }
     </style>
 </head>
@@ -26,7 +25,7 @@
         @include('partials.SidebarPemilik')
         <div class="flex flex-col flex-1 w-full">
             @include('partials.NavbarPemilik')
-            <main class="h-full overflow-y-auto  p-6 bg-slate-50">
+            <main class="h-full overflow-y-auto  p-6 bg-base">
                     @yield('content')
             </main>
         </div>

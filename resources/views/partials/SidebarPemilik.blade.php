@@ -8,23 +8,22 @@
         {{-- <div class="flex justify-center mt-2">
             <h1 x-show="isSidebarCollapsed" class="text-2xl font-medium text-gray-800">Base</h1>
         </div> --}}
-
         <div class="mt-3">
             <ul class="mt-2">
-                <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('pemilik/dashboard') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold ' }}"
+                <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('owner/dashboard') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold ' }}"
                     :class="{ 'justify-center': isSidebarCollapsed }">
-                    <a class="flex items-center text-sm  " href="{{ url('') }}">
+                    <a class="flex items-center text-sm  " href="{{ url('/owner/dashboard') }}">
                         <i class="fa-solid fa-grid-2 text-xl"></i>
                         <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Dashboard</span>
                     </a>
                 </li>
             </ul>
             <ul class="mt-2">
-                <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('s/dashboard') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary hover:font-semibold' }}"
+                <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('owner/room') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary hover:font-semibold' }}"
                     :class="{ 'justify-center': isSidebarCollapsed }">
-                    <a class="flex items-center text-sm  " href="{{ url('') }}">
+                    <a class="flex items-center text-sm  " href="{{ url('/owner/room') }}">
                         <i class="fas fa-tags text-xl"></i>
-                        <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Price</span>
+                        <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Room</span>
                     </a>
                 </li>
             </ul>
@@ -33,7 +32,7 @@
                     :class="{ 'justify-center': isSidebarCollapsed }">
                     <a class="flex items-center text-sm  " href="{{ url('') }}">
                         <i class="fa-solid fa-chart-simple text-xl"></i>
-                        <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Grafik</span>
+                        <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Management Penghuni</span>
                     </a>
                 </li>
             </ul>
@@ -42,7 +41,7 @@
                     :class="{ 'justify-center': isSidebarCollapsed }">
                     <a class="flex items-center text-sm  " href="{{ url('') }}">
                         <i class="fas fa-cubes text-xl"></i>
-                        <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Product</span>
+                        <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Pendapatan</span>
                     </a>
                 </li>
             </ul>
