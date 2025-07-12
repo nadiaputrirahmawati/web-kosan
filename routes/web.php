@@ -24,14 +24,6 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/users', function () {
         return view('admin.users');
     })->name('admin.users');
-
-    Route::get('/owners', function () {
-        return view('admin.owners');
-    })->name('admin.owners');
-
-    Route::get('/reports', function () {
-        return view('admin.reports');
-    })->name('admin.reports');
 });
 
 // Owner routes - khusus untuk owner
@@ -46,14 +38,6 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->group(function () {
     Route::get('/profile', function () {
         return view('user.profile');
     })->name('user.profile');
-
-    Route::get('/bookings', function () {
-        return view('user.bookings');
-    })->name('user.bookings');
-
-    Route::get('/search', function () {
-        return view('user.search');
-    })->name('user.search');
 });
 
 require __DIR__ . '/auth.php';
