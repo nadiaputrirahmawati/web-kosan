@@ -1,6 +1,6 @@
 <aside class="z-20 hidden md:block flex-shrink-0 transition-all duration-300  "
     :class="isSidebarCollapsed ? 'w-20' : 'w-[233px]'">
-    <div class="py-4 h-full overflow-y-auto bg-white  text-gray-500 dark:text-gray-400">
+    <div class="py-4 h-full overflow-y-auto bg-white  text-gray-500">
         <div class="flex items-center justify-center space-x-3 mt-4">
             <img src="{{ asset('img/image.png') }}" alt="" class="w-10">
             <span x-show="!isSidebarCollapsed" class="text-2xl font-medium text-gray-800">Base</span>

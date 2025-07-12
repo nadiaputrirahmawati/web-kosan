@@ -70,7 +70,7 @@
         x-transition:leave-start="opacity-100 transform translate-x-0"
         x-transition:leave-end="opacity-0 transform -translate-x-20">
 
-        <div class="py-4 text-gray-500 dark:text-gray-400">
+        <div class="py-4 text-gray-500">
             <div class="flex justify-center space-x-3 mt-4">
                 <a class=" text-2xl font-bold text-gray-800 " href="#">
                     <img src="{{ asset('img/image.png') }}" alt="" class="w-12">
