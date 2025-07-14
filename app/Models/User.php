@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'tgl_lahir' => 'date',
+        // 'tgl_lahir' => 'date',
     ];
 
     protected static function boot()

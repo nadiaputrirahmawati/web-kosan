@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class withdrawals extends Model
+class Withdrawal extends Model
 {
     protected $table = 'withdrawals';
 
@@ -30,5 +30,10 @@ class withdrawals extends Model
                 $model->{$model->getKeyName()} = (string) Str::uuid();
             }
         });
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id', 'user_id');
     }
 }
