@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('no_ktp')->unique()->m;
             $table->bigInteger('npwp')->nullable();
-            $table->enum('gender', ['perempuan', 'laki laki'])->nullable();
+            $table->enum('gender', ['P', 'L'])->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->text('address')->nullable();
             $table->enum('status', ['menikah', 'belum menikah'])->nullable();

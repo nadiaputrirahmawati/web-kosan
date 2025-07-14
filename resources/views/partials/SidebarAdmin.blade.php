@@ -1,8 +1,11 @@
-<aside class="z-20 hidden md:block flex-shrink-0 transition-all duration-300  "
-    :class="isSidebarCollapsed ? 'w-20' : 'w-[233px]'">
-    <div class="py-2 h-full overflow-y-auto bg-white  text-gray-500 dark:text-gray-400">
+<aside class="z-20 hidden md:block flex-shrink-0 transition-all duration-300  w-[233px]  rounded-xl">
+    <div class="py-2 h-full overflow-y-auto  text-gray-800">
         <div class="flex items-center justify-center space-x-3 mt-4">
-            <img src="{{ asset('img/simcard.png') }}" alt="" class="w-[120px]">
+            <div class="bg-white shadow-sm rounded-xl p-2 w-full">
+                <h1 class="text-sm font-semibold"> Lengkapi Profile Anda </h1>
+                <h1 class="text-xs font-semibold"> {{ Auth::user()->name }}</h1>
+                <p class="text-xs">Silahkan Lengkapi Profile Anda </p>
+            </div>
             {{-- <span x-show="!isSidebarCollapsed" class="text-2xl font-medium text-gray-800">Base</span> --}}
         </div>
         {{-- <div class="flex justify-center mt-2">

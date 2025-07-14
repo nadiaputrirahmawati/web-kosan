@@ -17,7 +17,7 @@ return new class extends Migration
             $table->uuid('room_id');
             $table->date('start_date');
             $table->date('end_date');
-            $table->enum('status', ['aktif', 'selesai', 'batal']);
+            $table->enum('status', ['active', 'completed', 'cancelled']);
             $table->string('signed_pdf')->nullable();
             $table->string('signature')->nullable();
             $table->bigInteger('deposit_amount')->nullable();

@@ -14,16 +14,17 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->uuid('room_id')->primary();
             $table->uuid('user_id');
-            $table->integer('quantity');
-            $table->enum('status', ['kosong', 'terisi', 'booking'])->default('kosong');
+            $table->string('name')->nullable();
+            $table->integer('total_rooms')->nullable();
+            $table->integer('occupied_rooms')->nullable();
             $table->enum('type', ['campur', 'putri', 'putra']);
             $table->bigInteger('price');
             $table->bigInteger('deposit_amount');
-            $table->json('facility')->nullable();
+            $table->json('room_facility')->nullable();
+            $table->json('public_facility')->nullable();
             $table->json('regulation')->nullable();
             $table->text('address');
             $table->text('description')->nullable();
-            $table->boolean('is_featured')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');

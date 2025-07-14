@@ -48,12 +48,12 @@
                         </a>
                         <a href="#" class="flex items-center w-full px-1 py-1 text-sm">
                             <i class="fas fa-sliders-h mr-3 text-black font-medium"></i>
-                            <span class="tracking-wider  text-black font-medium"> Account Settings  </span>
+                            <span class="tracking-wider  text-black font-medium"> Account Settings </span>
                         </a>
-                        <a href="#" class="flex items-center w-full px-1 py-1 text-sm">
-                            <i class="fa-regular fa-arrow-right-from-bracket mr-3 text-black font-medium"></i>
-                            <span class="tracking-wider  text-black font-medium"> Logout  </span>
-                        </a>
+                        <form method="POST" action="{{ route('logout') }}" class="inline">
+                            @csrf
+                            <button type="submit" class="text-sm text-red-600 hover:text-red-700">Logout</button>
+                        </form>
                     </div>
                 </li>
             </ul>

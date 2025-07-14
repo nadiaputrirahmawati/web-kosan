@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('user')->middleware(['auth', 'role:user'])->group(function () {
     Route::get('/profile', function () {
-        return view('user.profile');
+return view('user.profile.index');
     })->name('user.profile');
 });
 

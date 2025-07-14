@@ -1,3 +1,4 @@
+
 {{-- layout.blade.php --}}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Landing Page')</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
         rel="stylesheet">
@@ -32,15 +34,12 @@
     </style>
 </head>
 
-<body>
+<body class="bg-gray-50 text-gray-800">
     @include('partials.Navbar')
-        <div class="flex h-screen bg-gray-50 px-28 pt-20 pb-3">
-            @include('partials.SidebarAdmin')
-            <div class="flex flex-col flex-1 w-full pl-3">
-                <main class="h-full overflow-y-auto  p-6 bg-slate-50 border border-gray-300 rounded-lg">
-                    @yield('content')
-                </main>
-            </div>
-        </div>
+
+    <main class="pt-16">
+        @yield('content')
+    </main>
 </body>
+
 </html>

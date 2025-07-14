@@ -21,7 +21,7 @@ class GalleryController extends Controller
     public function store(Request $request, $id)
     {
         $request->validate([
-            'images'   => 'required|array|max:5',
+            'images'   => 'required|array|max:6',
             'images.*' => 'image|mimes:jpg,jpeg,png|max:2048'
         ]);
 

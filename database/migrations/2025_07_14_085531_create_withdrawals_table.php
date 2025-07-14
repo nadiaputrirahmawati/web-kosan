@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('complaints', function (Blueprint $table) {
-            $table->uuid('complaint_id')->primary();
+        Schema::create('withdrawals', function (Blueprint $table) {
+            $table->uuid('withdrawal_id')->primary();
             $table->uuid('user_id');
-            $table->uuid('room_id');
-            $table->string('title');
-            $table->text('description');
-            $table->enum('status', ['sent_in', 'in_process', 'completed']);
+            $table->bigInteger('amount');
+            $table->boolean('proof')->default(false);
+            $table->enum('status', ['pending', 'completed']);
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
-            $table->foreign('room_id')->references('room_id')->on('rooms')->onDelete('cascade');
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('complaints');
+        Schema::dropIfExists('withdrawals');
     }
 };

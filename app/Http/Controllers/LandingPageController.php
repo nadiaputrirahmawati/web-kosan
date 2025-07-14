@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Penghuni;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Rooms;
 use Illuminate\Http\Request;
 
-class PenghuniController extends Controller
+class LandingPageController extends Controller
 {
     public function index()
     {
         $room = Rooms::with('user', 'galleries')->get();
         // dd($room);
-        return view('user.index', compact('room'));
+        return view('index', compact('room'));
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $room = Rooms::with('user', 'galleries')->find($id);
         // dd($room);
-        return view('user.show', compact('room'));
+        return view('detailroom', compact('room'));
     }
 }
