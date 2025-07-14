@@ -17,7 +17,7 @@ class Withdrawal extends Model
 
     protected $fillable = [
         'owner_id',
-        'amout',
+        'amount',
         'proof',
         'status',
     ];
