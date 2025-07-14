@@ -21,9 +21,7 @@ Route::post('/user/room/{id}/show', [LandingPageController::class, 'store'])->na
 
 // Admin routes - khusus untuk mengelola user dan owner
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard')->middleware(['auth', 'role:admin']);
+    Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     Route::resource('user-management', UserManagementController::class);
     Route::get('withdrawals', [WithdrawalController::class, 'index'])->name('withdrawals.index');
