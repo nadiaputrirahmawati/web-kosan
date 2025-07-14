@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->uuid('contract_id')->primary();
+            $table->uuid('owner_id');
             $table->uuid('user_id');
             $table->uuid('room_id');
             $table->date('start_date');
@@ -20,9 +21,12 @@ return new class extends Migration
             $table->enum('status', ['active', 'completed', 'cancelled']);
             $table->string('signature')->nullable();
             $table->bigInteger('deposit_amount')->nullable();
+            $table->enum('verification_contract', ['pending', 'completed', 'refund'])->nullable();
+            $table->text('rejection_feedback')->nullable();
             $table->enum('deposit_status', ['pending', 'completed', 'refund'])->nullable();
             $table->timestamps();
-
+            
+            $table->foreign('owner_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->foreign('room_id')->references('room_id')->on('rooms')->onDelete('cascade');
         });

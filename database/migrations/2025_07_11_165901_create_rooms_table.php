@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->uuid('room_id')->primary();
-            $table->uuid('user_id');
+            $table->uuid('owner_id');
             $table->string('name')->nullable();
             $table->integer('total_rooms')->nullable();
             $table->integer('occupied_rooms')->nullable();
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
+            $table->foreign('owner_id')->references('user_id')->on('users')->onDelete('cascade');
         });
     }
 

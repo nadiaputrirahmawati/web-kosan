@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('withdrawals', function (Blueprint $table) {
             $table->uuid('withdrawal_id')->primary();
-            $table->uuid('user_id');
+            $table->uuid('owner_id');
             $table->bigInteger('amount');
             $table->boolean('proof')->default(false);
             $table->enum('status', ['pending', 'completed']);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
+            $table->foreign('owner_id')->references('user_id')->on('users')->onDelete('cascade');
         });
     }
 

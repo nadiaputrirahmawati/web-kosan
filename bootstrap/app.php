@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
+            'check-sewa' => \App\Http\Middleware\CheckSewa::class
         ]);
 
         // Mengarahkan guest ke halaman login

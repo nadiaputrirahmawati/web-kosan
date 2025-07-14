@@ -17,6 +17,7 @@ class Contract extends Model
 
     protected $fillable = [
         'room_id',
+        'owner_id',
         'user_id',
         'start_date',
         'end_date',
@@ -24,6 +25,8 @@ class Contract extends Model
         'signature',
         'deposit_amount',
         'deposit_status',
+        'verification_contract',
+        'rejection_feedback',
     ];
 
     protected static function boot()

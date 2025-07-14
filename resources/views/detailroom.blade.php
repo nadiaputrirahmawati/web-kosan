@@ -121,46 +121,27 @@
 
                     <label for="start_date" required class="block mt-4 mb-2 text-sm font-medium text-gray-700">Tanggal Mulai
                         Sewa</label>
-                    <input type="date" id="start_date" name="start_date"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring focus:border-primary">
+                    <form action="{{ route('user.contract.store') }}" method="post">
+                        @csrf
+                        @method('POST')
+                        <input type="hidden" name="room_id" value="{{ $room->room_id }}" id="">
+                        <input type="hidden" name="owner_id" value="{{ $room->owner_id }}" id="">
+                        <input type="hidden" name="deposit_amount" value="{{ $room->deposit_amount }}" id="">
+                        <input type="date" id="start_date" name="start_date" required
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring focus:border-primary">
 
-                    {{-- Cek status login & profil --}}
-                    <div class="mt-5">
-                        @guest
-                            {{-- Belum login --}}
-                            <a href="{{ route('user.login') }}" class="bg-primary text-white py-3 px-4 rounded inline-block">
-                                Login untuk Sewa
-                            </a>
-                        @else
-                            {{-- Sudah login --}}
-                            @php
-                                $user = Auth::user();
-                                $isProfileComplete = $user->phone_number && $user->address;
-                            @endphp
-
-                            @if (!$isProfileComplete)
-                                {{-- Profil belum lengkap --}}
-                                <a href="{{ route('profile.edit') }}"
-                                    class="bg-yellow-500 text-white py-3 px-4 rounded inline-block">
-                                    Lengkapi Profil untuk Sewa
-                                </a>
-                            @else
-                                {{-- Profil lengkap, bisa ajukan sewa --}}
-                                {{-- <form action="{{ route('sewa.ajukan', $room->id) }}" method="POST"> --}}
-                                    @csrf
-                                    <input type="hidden" name="start_date" id="start_date_hidden">
-                                    <button type="submit"
-                                        onclick="document.getElementById('start_date_hidden').value = document.getElementById('start_date').value"
-                                        class="bg-primary text-white py-3 px-4 rounded inline-block w-full text-center">
-                                        Ajukan Sewa
-                                    </button>
-                                {{-- </form> --}}
-                            @endif
-                        @endguest
-                    </div>
+                        {{-- Cek status login & profil --}}
+                        <div class="mt-5">
+                            <button type="submit"
+                                class="bg-primary text-white py-3 px-4 rounded inline-block w-full text-center">
+                                Ajukan Sewa
+                            </button>
+                    </form>
+                    {{-- </form> --}}
                 </div>
             </div>
-
         </div>
+
+    </div>
     </div>
 @endsection

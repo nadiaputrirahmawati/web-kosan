@@ -43,7 +43,7 @@ class RoomController extends Controller
 
         // 2) BUAT RECORD (dengan owner user_id)
         Rooms::create([
-            'user_id'        => Auth::user()->user_id,
+            'owner_id'        => Auth::user()->user_id,
             'name'           => $validated['name'],
             'price'          => $validated['price'],
             'total_rooms'       => $validated['total_rooms'],

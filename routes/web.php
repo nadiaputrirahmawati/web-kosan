@@ -13,6 +13,7 @@ require base_path('routes/penghuni.php');
 // Dashboard routes dengan role-based middleware yang terpisah
 Route::get('/', [LandingPageController::class, 'index']);
 Route::get('/user/room/{id}/show', [LandingPageController::class, 'show'])->name('user.rooms.show');
+Route::post('/user/room/{id}/show', [LandingPageController::class, 'store'])->name('user.rooms.show');
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');

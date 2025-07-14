@@ -16,7 +16,7 @@ class withdrawals extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'user_id',
+        'owner_id',
         'amout',
         'proof',
         'status',
