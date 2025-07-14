@@ -37,7 +37,7 @@
                 </li>
             </ul>
             <ul class="mt-2">
-                <li class="relative font-medium py-3 px-7 flex items-center gap-3 {{ request()->is('admin/withdrawals*') ? 'bg-gradient-to-r from-purple-100 to-transparent  font-semibold' : 'text-primary hover:font-semibold' }}"
+                <li class="relative font-medium py-3 px-7 flex items-center gap-3 {{ request()->is('admin/withdrawals*') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold ' }}"
                     :class="{ 'justify-center': isSidebarCollapsed }">
                     <a class="flex items-center text-sm  " href="{{ url('admin/withdrawals') }}">
                         <i class="fas fa-cubes text-xl"></i>
@@ -46,7 +46,7 @@
                 </li>
             </ul>
             <ul class="mt-2">
-                <li class="relative font-medium py-3 px-7 flex items-center gap-3 {{ request()->is('admin/user-management*') ? 'bg-gradient-to-r from-purple-100 to-transparent  font-semibold' : 'text-primary hover:font-semibold' }}"
+                <li class="relative font-medium py-3 px-7 flex items-center gap-3 {{ request()->is('admin/user-management*') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold' }}"
                     :class="{ 'justify-center': isSidebarCollapsed }">
                     <a class="flex items-center text-sm  " href="{{ url('admin/user-management') }}">
                         <i class="fas fa-user text-xl"></i>
