@@ -28,8 +28,7 @@ class RoomController extends Controller
         $validated = $request->validate([
             'name'           => 'required|string|max:255',
             'price'          => 'required|numeric|min:0',
-            'quantity'       => 'required|integer|min:1',
-            'status'         => 'required|in:kosong,terisi,booking',
+            'total_rooms'       => 'required|integer|min:1',
             'type'           => 'required|in:campur,putri,putra',
             'deposit_amount' => 'nullable|numeric|min:0',
             'room_facility' => 'nullable|array',
@@ -40,7 +39,6 @@ class RoomController extends Controller
             'description'    => 'nullable|string',
             'regulation'     => 'nullable|array',
             'regulation.*'   => 'string|max:255',
-            'is_featured'    => 'nullable|boolean',
         ]);
 
         // 2) BUAT RECORD (dengan owner user_id)
@@ -48,8 +46,7 @@ class RoomController extends Controller
             'user_id'        => Auth::user()->user_id,
             'name'           => $validated['name'],
             'price'          => $validated['price'],
-            'quantity'       => $validated['quantity'],
-            'status'         => $validated['status'],
+            'total_rooms'       => $validated['total_rooms'],
             'type'           => $validated['type'],
             'deposit_amount' => $validated['deposit_amount'] ?? 0,
             'room_facility'  => $validated['room_facility'] ?? null,

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->enum('status', ['active', 'completed', 'cancelled']);
-            $table->string('signed_pdf')->nullable();
             $table->string('signature')->nullable();
             $table->bigInteger('deposit_amount')->nullable();
             $table->enum('deposit_status', ['pending', 'completed', 'refund'])->nullable();

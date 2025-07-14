@@ -19,8 +19,8 @@ class Rooms extends Model
         'room_id',
         'user_id',
         'name',
-        'quantity',
-        'status',
+        'total_rooms',
+        'occupied_rooms',
         'type',
         'price',
         'deposit_amount',
@@ -29,14 +29,12 @@ class Rooms extends Model
         'regulation',
         'address',
         'description',
-        'is_featured',
     ];
 
     protected $casts = [
         'regulation'       => 'array',
         'room_facility'    => 'array',
         'public_facility'  => 'array',
-        'is_featured'      => 'boolean',
     ];
 
 

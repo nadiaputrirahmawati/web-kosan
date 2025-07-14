@@ -38,7 +38,7 @@
                         class="flex items-center border border-gray-300 rounded-lg px-3 py-2 bg-white mt-2 
                             focus-within:border-gray-800 focus-within:ring-1 focus-within:ring-gray-800 transition-colors duration-200">
                         <i class="fa-light fa-door-open mr-2"></i>
-                        <input type="number" name="quantity" id="quantity" required placeholder="1"
+                        <input type="number" name="total_rooms" id="total_rooms" required placeholder="1"
                             class="w-full outline-none text-sm" />
                     </div>
                 </div>
@@ -46,20 +46,7 @@
 
             {{-- Status, Type, Deposit --}}
             <div class="flex lg:flex-row flex-col gap-4 mb-4">
-                <div class="lg:w-4/12 w-full">
-                    <label class="block text-sm font-semibold text-gray-700">Status *</label>
-                    <div class="mt-2">
-                        <select name="status" required
-                            class="block w-full rounded-lg border border-gray-300 px-3 py-2 bg-white text-sm 
-                               focus:border-gray-800 focus:ring-1 focus:ring-gray-800">
-                            <option value="">-- Pilih Status --</option>
-                            <option value="kosong">Kosong</option>
-                            <option value="terisi">Terisi</option>
-                            <option value="booking">Booking</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="lg:w-4/12 w-full">
+                <div class="lg:w-6/12 w-full">
                     <label class="block text-sm font-semibold text-gray-700">Tipe Kamar *</label>
                     <div class="mt-2">
                         <select name="type" required
@@ -72,7 +59,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="lg:w-4/12 w-full">
+                <div class="lg:w-6/12 w-full">
                     <label for="deposit_amount" class="block text-sm font-semibold text-gray-700">Jaminan (Rp)</label>
                     <div
                         class="flex items-center border border-gray-300 rounded-lg px-3 py-2 bg-white mt-2 

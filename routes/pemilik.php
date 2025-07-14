@@ -10,7 +10,7 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
     Route::get('/kost', function () {
         return view('owner.kost');
     })->name('owner.properties');
-     Route::get('/dashboard', [PemilikController::class, 'index']);
+     Route::get('/dashboard', [PemilikController::class, 'index'])->name('owner.dashboard');
 
      Route::get('room', [RoomController::class, 'index'])->name('rooms.index');
      Route::get('room/create', [RoomController::class, 'create'])->name('rooms.create');

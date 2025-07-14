@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('payment_id')->primary();
             $table->uuid('user_id');
             $table->uuid('contract_id');
             $table->bigInteger('amount');
@@ -21,7 +21,6 @@ return new class extends Migration
             $table->text('snap_token')->nullable();
             $table->string('payment_token')->nullable();
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->foreign('contract_id')->references('contract_id')->on('contracts')->onDelete('cascade');

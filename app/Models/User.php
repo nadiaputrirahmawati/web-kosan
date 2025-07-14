@@ -39,6 +39,8 @@ class User extends Authenticatable
         'ktp_picture',
         'ktp_picture_person',
         'email_verified_at',
+        'status_verification',
+        'rejection_feedback',
         'remember_token',
     ];
 

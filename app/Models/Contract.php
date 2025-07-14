@@ -3,8 +3,37 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Contract extends Model
 {
-    //
+    protected $table = 'contracts';
+
+    protected $primaryKey = 'contract_id';
+
+    protected $keyType = 'string';
+
+    public $incrementing = false;
+
+    protected $fillable = [
+        'room_id',
+        'user_id',
+        'start_date',
+        'end_date',
+        'status',
+        'signature',
+        'deposit_amount',
+        'deposit_status',
+    ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (! $model->getKey()) {
+                $model->{$model->getKeyName()} = (string) Str::uuid();
+            }
+        });
+    }
 }
