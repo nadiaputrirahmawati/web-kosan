@@ -39,4 +39,14 @@ class Contract extends Model
             }
         });
     }
+
+    public function room()
+    {
+        return $this->belongsTo(Rooms::class, 'room_id', 'room_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
 }

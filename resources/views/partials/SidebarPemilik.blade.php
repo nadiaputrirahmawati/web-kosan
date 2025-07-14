@@ -23,7 +23,7 @@
                     :class="{ 'justify-center': isSidebarCollapsed }">
                     <a class="flex items-center text-sm  " href="{{ url('/owner/room') }}">
                         <i class="fas fa-tags text-xl"></i>
-                        <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Room</span>
+                        <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Kost</span>
                     </a>
                 </li>
             </ul>

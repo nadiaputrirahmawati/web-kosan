@@ -34,7 +34,7 @@
 
 <body>
     @include('partials.Navbar')
-        <div class="flex h-screen bg-gray-50 px-28 pt-20 pb-3">
+        <div class="flex h-screen bg-gray-50 lg:px-28 px-6 pt-20 lg:pb-0 pb-20 lg:pt-20">
             @include('partials.SidebarPenghuni')
             <div class="flex flex-col flex-1 w-full pl-3">
                 <main class="h-full overflow-y-auto  p-6 bg-slate-50 border border-gray-300 rounded-lg">

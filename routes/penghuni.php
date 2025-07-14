@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('user','as', 'user.')->middleware(['auth', 'role:user'])->group(function () {
     Route::get('/profile', function () { return view('user.profile.index');})->name('profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('user.profile.update');
-    Route::post('/contract', [ContractController::class, 'store'])->name('user.contract.store')->middleware('check-sewa');
+    Route::post('room/contract', [ContractController::class, 'store'])->name('user.contract.store')->middleware('check-sewa');
+    Route::get('room/contract', [ContractController::class, 'index'])->name('user.contract');
 });
 
 Route::get('/user/dashboard', function () {return view('user.dashboard'); })->name('user.dashboard')->middleware(['auth', 'role:user']);

@@ -11,6 +11,17 @@ use Illuminate\Support\Str;
 
 class ContractController extends Controller
 {
+
+    public function index()
+    {
+
+        $contracts = Contract::with(['room.owner']) // eager load room dan owner dari room
+            ->where('user_id', Auth::user()->user_id)
+            ->latest()
+            ->get();
+        // dd($contracts);
+        return view('user.contract.index', compact('contracts'));
+    }
     public function store(Request $request)
     {
 
@@ -26,17 +37,17 @@ class ContractController extends Controller
 
         Contract::create([
             'contract_id'          => Str::uuid(),
-            'user_id'              => Auth::user()->user_id,      
+            'user_id'              => Auth::user()->user_id,
             'verification_contract' => 'pending',
             'deposit_status'       => 'pending',
             'deposit_amount'       => $validated['deposit_amount'],
             'start_date'           => $validated['start_date'],
-            'end_date'             => $endDate,         
+            'end_date'             => $endDate,
             'owner_id'             => $validated['owner_id'],
             'room_id'              => $validated['room_id'],
         ]);
 
         notyf()->success('Ajukan Sewa Berhasil, Silahkan Tunggu Verifikasi Pemilik Kos');
-        return redirect()->route('user.penghuni.profile');
+        return redirect()->route('user.contract');
     }
 }
