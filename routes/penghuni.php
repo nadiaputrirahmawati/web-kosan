@@ -15,9 +15,9 @@ Route::prefix('user','as', 'user.')->middleware(['auth', 'role:user'])->group(fu
     Route::put('/profile', [ProfileController::class, 'update'])->name('user.profile.update');
     Route::post('room/contract', [ContractController::class, 'store'])->name('user.contract.store')->middleware('check-sewa');
     Route::get('room/contract', [ContractController::class, 'index'])->name('user.contract');
+    Route::get('/dashboard', function () {return view('user.dashboard'); })->name('user.dashboard');
 });
 
-Route::get('/user/dashboard', function () {return view('user.dashboard'); })->name('user.dashboard')->middleware(['auth', 'role:user']);
 
 
 ?>
