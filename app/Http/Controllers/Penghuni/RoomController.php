@@ -1,65 +1,41 @@
 <?php
 
-namespace App\Http\Controllers\Penghuni;
+namespace App\Http\Controllers\penghuni;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contract;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class RoomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $data = Contract::with(['room.owner', 'payment'])
+            ->where('user_id', Auth::id())
+            ->whereHas('payment', fn($q) => $q->where('status', 'completed'))
+            ->latest()
+            ->first();                    // 🔄 jadi single model, bukan collection
+
+        if (!$data) {
+            return view('user.room.index')->with('message', 'Belum ada kontrak aktif');
+        }
+
+        $checkInUrl = route('user.contract.checkin', $data->contract_id);
+        $qrCode     = QrCode::size(100)->generate($checkInUrl);
+
+        return view('user.room.index', compact('data', 'qrCode'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function checkin($id)
     {
-        //
-    }
+        $contract = Contract::where('contract_id', $id)->firstOrFail();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // Update status checkin (buat kolom checkin_time di tabel contracts ya)
+        $contract->status = 'active';
+        $contract->save();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('user.room.checkin', compact('contract'));
     }
 }

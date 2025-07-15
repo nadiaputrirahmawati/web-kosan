@@ -4,6 +4,7 @@ use App\Http\Controllers\Penghuni\ContractController;
 use App\Http\Controllers\penghuni\PaymentController;
 use App\Http\Controllers\Penghuni\PenghuniController;
 use App\Http\Controllers\Penghuni\ProfileController;
+use App\Http\Controllers\penghuni\RoomController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,6 +24,10 @@ Route::prefix('user', 'as', 'user.')->middleware(['auth', 'role:user'])->group(f
     })->name('user.dashboard');
     Route::get('room/contract/{id}/ttd', [ContractController::class, 'ttdKontrak'])->name('user.contract.ttd');
     Route::post('room/contract/{id}/ttd', [ContractController::class, 'createsignature'])->name('user.contract.signature.save');
+    Route::post('room/contract/{id}/reject', [ContractController::class, 'reject'])->name('user.contract.signature.reject');
+    Route::get('room', [RoomController::class, 'index'])->name('user.room');
+    Route::get('/user/room/checkin/{id}', [RoomController::class, 'checkin'])->name('user.contract.checkin');
+
 });
 Route::post('user/room/contract/payment', [PaymentController::class, 'paymentSewa'])->name('user.contract.payment');
 Route::post('user/room/contract/payment/callback', [PaymentController::class, 'handleCallback']);

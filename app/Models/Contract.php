@@ -49,4 +49,9 @@ class Contract extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class, 'contract_id', 'contract_id');
+    }
 }

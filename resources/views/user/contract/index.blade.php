@@ -73,38 +73,63 @@
                     <h1>Deposit : <strong>Rp.{{ number_format($data->deposit_amount, 0, ',', '.') }}</strong></h1>
                     <h1>Jumlah Yang Harus Dibayar : <strong>Rp.{{ number_format($jumlah, 0, ',', '.') }}</strong></h1>
                 </div>
-
-                @if (empty($data->signature))
-                    <div class="flex justify-end space-x-3 mt-5">
-                        <div class="mt-1">
-                            <a href="{{ route('user.contract.ttd', $data->contract_id) }}"
-                                class="bg-primary px-3 font-bold rounded-lg py-2 text-white text-sm">
-                                Tanda Tangan Kontrak Kost
-                            </a>
-                        </div>
-                        <div class="mt-1">
-                            <a href="{{ route('user.contract.ttd', $data->contract_id) }}"
-                                class="bg-red-500 px-3 font-bold rounded-lg py-2 text-white text-sm">
-                                Batal Pengajuan
-                            </a>
-                        </div>
+                @if ($data->status === 'cancelled')
+                    <div class="mt-2 p-3 bg-red-50 border border-red-600 rounded-lg ">
+                        <p>
+                            Pengajuan Sewa Anda Di batalkan!, <span class="italic font-semibold text-red-800">Silahkan Lakukan Pengajuan Kamar Baru</span>
+                        </p>
                     </div>
-                @elseif($data->status === 'completed')
+                @elseif($data->payment->status === 'completed')
                     <div class="mt-2 p-3 bg-yellow-50 border border-yellow-600 rounded-lg ">
                         <p>
                             Yeay! Selamat datang di kos kami! 🎉 Terima kasih Telah memilih kami. Jangan lupa datang H-1
-                            untuk lihat lokasi dan check-in dengan barcode yang tersedia ya! <span>Selamat bersiap pindah ke
+                            untuk lihat lokasi dan check-in dengan barcode yang tersedia ya! <a href="" class="font-semibold text-red-500 underline italic text-sm">Cek Barcode di sini</a> <span> Selamat bersiap pindah ke
                                 kos baru!</span>
                         </p>
 
                     </div>
-                @else
+                @elseif ($data->signature === null)
                     <div class="flex justify-end space-x-3 mt-5">
+                        <div>
+                            <form action="{{ route('user.contract.signature.reject', $data->contract_id) }}"
+                                method="post">
+                                @csrf
+                                @method('POST')
+                                <input type="text" name="price" value="{{ $data->room->price }}" hidden
+                                    id="">
+                                <input type="text" name="name" value="{{ $data->room->name }}" hidden id="">
+                                <input type="text" name="contract_id" value="{{ $data->contract_id }}" hidden
+                                    id="">
+                                <button type="submit" class="bg-red-500 px-3 font-bold rounded-lg py-2 text-white text-sm">
+                                    Batal Pengajuan
+                                </button>
+                            </form>
+
+                        </div>
                         <div class="mt-1">
                             <a href="{{ route('user.contract.ttd', $data->contract_id) }}"
                                 class="bg-primary px-3 font-bold rounded-lg py-2 text-white text-sm">
                                 Tanda Tangan Kontrak Kost
                             </a>
+                        </div>
+                    </div>
+                @else
+                    <div class="flex justify-end space-x-3 mt-5">
+                        <div>
+                            <form action="{{ route('user.contract.signature.reject', $data->contract_id) }}"
+                                method="post">
+                                @csrf
+                                @method('POST')
+                                <input type="text" name="price" value="{{ $data->room->price }}" hidden
+                                    id="">
+                                <input type="text" name="name" value="{{ $data->room->name }}" hidden id="">
+                                <input type="text" name="contract_id" value="{{ $data->contract_id }}" hidden
+                                    id="">
+                                <button type="submit" class="bg-red-500 px-3 font-bold rounded-lg py-2 text-white text-sm">
+                                    Batal Pengajuan
+                                </button>
+                            </form>
+
                         </div>
                         <div>
                             <form action="{{ route('user.contract.payment') }}" method="post">

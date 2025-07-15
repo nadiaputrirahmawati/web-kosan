@@ -16,7 +16,7 @@ class ContractController extends Controller
     public function index()
     {
 
-        $contracts = Contract::with(['room.owner']) // eager load room dan owner dari room
+        $contracts = Contract::with(['room.owner', 'payment']) // eager load room dan owner dari room
             ->where('user_id', Auth::user()->user_id)
             ->latest()
             ->get();
@@ -92,5 +92,14 @@ class ContractController extends Controller
         } else {
             return back()->withErrors(['signature' => 'Format tanda tangan tidak valid.']);
         }
+    }
+
+    public function reject($id)
+    {
+        $contract = Contract::where('contract_id', $id)->firstOrFail();
+        $contract->status = 'cancelled';
+        $contract->save();
+        notyf()->success('Penarikan Deposit Berhasil Ditolak');
+        return redirect()->back();
     }
 }

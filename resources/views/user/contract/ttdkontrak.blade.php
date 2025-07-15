@@ -14,10 +14,13 @@
             </div>
         </div>
     @endif
+    <h1 class="text-sm font-medium"><a href="/user/room/contract">Contract /</a> <span class="font-bold"> Surat Perjanjian</span></h1>
+    <h1 class="text-primary font-extrabold text-xl mb-4">Surat Perjanjian Sewa Kost</h1>
     <div class="max-w-4xl mx-auto bg-white lg:p-10 p-3 rounded-lg shadow-md border">
         <h2 class="text-2xl font-bold text-center mb-6">Surat Perjanjian Sewa Kost</h2>
 
-        <p class="mb-4">Pada hari ini, <strong>{{ now()->translatedFormat('l, d F Y') }}</strong>, telah terjadi perjanjian
+        <p class="mb-4">Pada hari ini, <strong>{{ now()->translatedFormat('l, d F Y') }}</strong>, telah terjadi
+            perjanjian
             sewa antara:</p>
 
         <div class="mb-6">
@@ -119,7 +122,8 @@
             @endphp
             @foreach ($contract->room->regulation as $rule)
                 <h1><i class="fa-solid fa-{{ $i++ }} ml-3"></i><strong>.</strong>
-                    <span>{{ $rule }}</span></h1>
+                    <span>{{ $rule }}</span>
+                </h1>
             @endforeach
         </ul>
 
@@ -131,7 +135,8 @@
             <li>Pengembalian dilakukan maksimal 7 hari kerja setelah masa sewa berakhir.</li>
         </ul>
 
-        <p class="mb-4 text-justify">Penyewa setuju untuk membayar sewa secara bulanan dan mematuhi seluruh peraturan yang telah
+        <p class="mb-4 text-justify">Penyewa setuju untuk membayar sewa secara bulanan dan mematuhi seluruh peraturan yang
+            telah
             ditetapkan oleh pemilik kost. Apabila terdapat pelanggaran, pemilik berhak memberikan sanksi sesuai kebijakan.
         </p>
 
@@ -145,8 +150,7 @@
                 <div>
                     <p class="mb-2">Penyewa,</p>
                     @if ($contract->signature)
-                        <img src="{{ asset('storage/' . $contract->signature) }}" class="h-20 mx-auto"
-                            alt="Tanda Tangan">
+                        <img src="{{ asset('storage/' . $contract->signature) }}" class="h-20 mx-auto" alt="Tanda Tangan">
                     @else
                         <p class="italic text-sm text-gray-400">Belum ditandatangani</p>
                         {{-- Tanda tangan digital --}}
