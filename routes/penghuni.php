@@ -21,6 +21,8 @@ Route::prefix('user', 'as', 'user.')->middleware(['auth', 'role:user'])->group(f
     Route::get('/dashboard', function () {
         return view('user.dashboard');
     })->name('user.dashboard');
+    Route::get('room/contract/{id}/ttd', [ContractController::class, 'ttdKontrak'])->name('user.contract.ttd');
+    Route::post('room/contract/{id}/ttd', [ContractController::class, 'createsignature'])->name('user.contract.signature.save');
 });
 Route::post('user/room/contract/payment', [PaymentController::class, 'paymentSewa'])->name('user.contract.payment');
 Route::post('user/room/contract/payment/callback', [PaymentController::class, 'handleCallback']);

@@ -73,28 +73,55 @@
                     <h1>Deposit : <strong>Rp.{{ number_format($data->deposit_amount, 0, ',', '.') }}</strong></h1>
                     <h1>Jumlah Yang Harus Dibayar : <strong>Rp.{{ number_format($jumlah, 0, ',', '.') }}</strong></h1>
                 </div>
-                <div class="flex justify-end space-x-3 mt-5">
-                    <div>
-                        <a href="/owner/room/contract/{{ $data->user->user_id }}/show"
-                            class="bg-red-500 px-3 font-bold rounded-lg py-2 text-white text-sm">
-                            Batal Pengajuan
-                        </a>
-                    </div>
-                    <div>
-                        <form action="{{ route('user.contract.payment') }}" method="post">
-                            @csrf
-                            @method('POST')
-                            <input type="text" name="price" value="{{ $data->room->price }}" hidden id="">
-                            <input type="text" name="name" value="{{ $data->room->name }}" hidden id="">
-                            <input type="text" name="contract_id" value="{{ $data->contract_id }}" hidden id="">
-                            <button type="submit"
+
+                @if (empty($data->signature))
+                    <div class="flex justify-end space-x-3 mt-5">
+                        <div class="mt-1">
+                            <a href="{{ route('user.contract.ttd', $data->contract_id) }}"
                                 class="bg-primary px-3 font-bold rounded-lg py-2 text-white text-sm">
-                                Bayar Kost
-                            </button>
-                        </form>
+                                Tanda Tangan Kontrak Kost
+                            </a>
+                        </div>
+                        <div class="mt-1">
+                            <a href="{{ route('user.contract.ttd', $data->contract_id) }}"
+                                class="bg-red-500 px-3 font-bold rounded-lg py-2 text-white text-sm">
+                                Batal Pengajuan
+                            </a>
+                        </div>
+                    </div>
+                @elseif($data->status === 'completed')
+                    <div class="mt-2 p-3 bg-yellow-50 border border-yellow-600 rounded-lg ">
+                        <p>
+                            Yeay! Selamat datang di kos kami! 🎉 Terima kasih Telah memilih kami. Jangan lupa datang H-1
+                            untuk lihat lokasi dan check-in dengan barcode yang tersedia ya! <span>Selamat bersiap pindah ke
+                                kos baru!</span>
+                        </p>
 
                     </div>
-                </div>
+                @else
+                    <div class="flex justify-end space-x-3 mt-5">
+                        <div class="mt-1">
+                            <a href="{{ route('user.contract.ttd', $data->contract_id) }}"
+                                class="bg-primary px-3 font-bold rounded-lg py-2 text-white text-sm">
+                                Tanda Tangan Kontrak Kost
+                            </a>
+                        </div>
+                        <div>
+                            <form action="{{ route('user.contract.payment') }}" method="post">
+                                @csrf
+                                @method('POST')
+                                <input type="text" name="price" value="{{ $data->room->price }}" hidden
+                                    id="">
+                                <input type="text" name="name" value="{{ $data->room->name }}" hidden id="">
+                                <input type="text" name="contract_id" value="{{ $data->contract_id }}" hidden
+                                    id="">
+                                <button type="submit" class="bg-primary px-3 font-bold rounded-lg py-2 text-white text-sm">
+                                    Bayar Kost
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                @endif
             @elseif ($data->verification_contract == 'rejected')
                 <div class="bg-red-50 border border-red-700 p-3 rounded-lg mt-3">
                     <h1 class="text-xs font-bold"> Pengajuan Sewa Kamu Di Tolak Karena : </h1>

@@ -1,7 +1,7 @@
 <aside class="z-20 hidden md:block flex-shrink-0 transition-all duration-300 w-[233px] rounded-xl">
     <div class="py-2 h-full overflow-y-auto text-gray-800">
         <div class="flex items-center justify-center space-x-3">
-            <div class="bg-white shadow-sm rounded-xl p-2 w-full">
+            <div class="bg-white shadow rounded-xl p-2 w-full">
                 <div class="flex justify-center">
                     @php
                         $profilePicture = Auth::user()->profile_picture

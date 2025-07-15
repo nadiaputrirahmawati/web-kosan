@@ -37,7 +37,7 @@
         <div class="flex h-screen bg-gray-50 lg:px-28 px-5 pt-20 lg:pb-5 pb-20 lg:pt-20">
             @include('partials.SidebarPenghuni')
             <div class="flex flex-col flex-1 w-full pl-3">
-                <main class="h-full overflow-y-auto  p-6 bg-slate-50 border border-gray-300 rounded-lg">
+                <main class="h-full overflow-y-auto  bg-slate-50">
                     @yield('content')
                 </main>
             </div>
