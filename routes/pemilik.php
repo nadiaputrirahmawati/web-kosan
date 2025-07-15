@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Pemilik\ContractController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\WithdrawalController;
 use App\Http\Controllers\Pemilik\RoomController;
 use App\Http\Controllers\Pemilik\GalleryController;
 use App\Http\Controllers\Pemilik\PemilikController;
+use App\Http\Controllers\Pemilik\ContractController;
 
 // Owner routes - khusus untuk owner
 Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
@@ -30,6 +31,9 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
     Route::post('room/contract/{id}/verifikasi', [ContractController::class, 'verifikasi'])->name('rooms.contract.verifikasi');
     Route::put('room/contract/{id}/tolak', [ContractController::class, 'tolak'])->name('rooms.contract.reject');
 
-});
+    //Complaint area
+    Route::get('complaints', [ComplaintController::class,'index'])->name('owner.complaints.index');
+    Route::get('complaints/{id}/edit', [ComplaintController::class,'edit'])->name('owner.complaints.edit');
+    Route::put('complaints/{id}', [ComplaintController::class,'update'])->name('owner.complaints.update');
 
-?>
+});

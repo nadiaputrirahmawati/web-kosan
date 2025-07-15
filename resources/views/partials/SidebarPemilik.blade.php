@@ -45,6 +45,15 @@
                     </a>
                 </li>
             </ul>
+            <ul class="mt-2">
+                <li class="relative font-medium py-3 px-7 flex items-center gap-3 {{ request()->is('owner/complaints*') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold' }}"
+                    :class="{ 'justify-center': isSidebarCollapsed }">
+                    <a class="flex items-center text-sm" href="{{ url('owner/complaints') }}">
+                        <i class="fas fa-comments text-xl"></i>
+                        <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Komplain</span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </aside>
