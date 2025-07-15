@@ -9,12 +9,12 @@
             <div class="flex justify-between w-full">
                 <div class="flex space-x-3">
                     <div>
-                    @forelse ($data->room->galleries as $gallery)
-                        <img src="{{ asset('storage/' . $gallery->first()->image_url) }}" alt="foto kamar"
-                            class="w-full h-24 object-cover rounded">
-                    @empty
-                        <span class="col-span-3 text-xs text-gray-400">Belum ada foto</span>
-                    @endforelse
+                        @if ($data->room->galleries->isNotEmpty())
+                            <img src="{{ asset('storage/' . $data->room->galleries->first()->image_url) }}" alt="foto kamar"
+                                class="w-full h-24 object-cover rounded">
+                        @else
+                            <span class="col-span-3 text-xs text-gray-400">Belum ada foto</span>
+                        @endif
                     </div>
 
                     <div class="">
@@ -26,12 +26,21 @@
 
                     </div>
                 </div>
-                <div class="mt-4">
-                    <a href="/owner/room/contract/{{ $data->user->user_id }}/show"
-                        class="bg-black px-3 font-bold rounded-lg py-2 text-white text-sm">
-                        Verifikasi Permintaan Sewa
-                    </a>
-                </div>
+                @if ($data->verification_contract === 'pending')
+                    <div class="mt-4">
+                        <a href="/owner/room/contract/{{ $data->user->user_id }}/show"
+                            class="bg-black px-3 font-bold rounded-lg py-2 text-white text-sm">
+                            Verifikasi Permintaan Sewa
+                        </a>
+                    </div>
+                @else
+                    <div class="mt-4">
+                        <a href="/owner/room/contract/{{ $data->user->user_id }}/show"
+                            class="bg-black px-3 font-bold rounded-lg py-2 text-white text-sm">
+                            Detail Pengajuan Sewa
+                        </a>
+                    </div>
+                @endif
             </div>
             {{-- <hr class="border border-gray-100"> --}}
             <div class="flex space-x-3 justify-between mt-3 ">

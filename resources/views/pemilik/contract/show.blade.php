@@ -2,7 +2,8 @@
 @section('content')
     <div class="flex justify-between">
         <div>
-            <h1 class="text-sm font-medium"><a href="/owner/room/contract">Contract /</a> <span class="font-bold"> Contract Pengajuan Kamar</span></h1>
+            <h1 class="text-sm font-medium"><a href="/owner/room/contract">Contract /</a> <span class="font-bold"> Contract
+                    Pengajuan Kamar</span></h1>
             <h1 class="text-primary font-extrabold text-xl mb-4">Data Pengajuan Sewa</h1>
         </div>
     </div>
@@ -109,16 +110,16 @@
                             <h1 class="text-[11px]">Type Kamar</h1>
                         </div>
                     </div>
-                    <div class="flex mt-2">
+                    <div class="flex mt-2 space-x-2">
+                        <div>
+                            <h1 class="font-bold text-xs text-end">
+                                {{ $contract->verification_contract === 'completed' ? 'Sudah Diverifikasi' : 'Belum Diverifikasi' }}
+                            </h1>
+                            <h1 class="text-[11px] font-semibold text-black text-end">Status Verifikasi</h1>
+                        </div>
                         <div>
                             <i
                                 class="fa-light fa-signal mr-2 bg-orange-50 text-orange-900 lg:px-3 lg:py-2 px-3 py-2 rounded-lg lg:text-sm text-xs"></i>
-                        </div>
-                        <div>
-                            <h1 class="font-bold text-xs">
-                                {{ $contract->verification_contract === 'completed' ? 'Sudah Diverifikasi' : 'Belum Diverifikasi' }}
-                            </h1>
-                            <h1 class="text-[11px] font-semibold text-black">Status Verifikasi</h1>
                         </div>
                     </div>
                 </div>
@@ -135,14 +136,14 @@
                             <h1 class="text-[11px] font-semibold text-black">Deposito</h1>
                         </div>
                     </div>
-                    <div class="flex mt-2">
+                    <div class="flex mt-2 space-x-1">
+                        <div>
+                            <h1 class="font-bold text-xs text-end">Rp. {{ number_format($contract->room->price, 0, ',', '.') }}</h1>
+                            <h1 class="text-[11px] text-end">Harga Kamar</h1>
+                        </div>
                         <div>
                             <i
                                 class="fa-light fa-money-bill-wave mr-2 bg-base text-primary lg:px-3 lg:py-2 px-3 py-2 rounded-lg lg:text-sm text-xs"></i>
-                        </div>
-                        <div>
-                            <h1 class="font-bold text-xs">Rp. {{ number_format($contract->room->price, 0, ',', '.') }}</h1>
-                            <h1 class="text-[11px]">Harga Kamar</h1>
                         </div>
                     </div>
                 </div>
@@ -171,9 +172,9 @@
                             </button>
                         </div>
                     @elseif ($contract->verification_contract === 'completed')
-                       <div>
-                        <h1 class="font-bold text-md"> Data Sudah Diverifikasi Silahkan Melakukan Pembayaran</h1>
-                       </div>
+                        <div>
+                            <h1 class="font-bold text-md"> Data Sudah Diverifikasi Silahkan Melakukan Pembayaran</h1>
+                        </div>
                     @elseif ($contract->verification_contract === 'rejected')
                         <div>
                             <h1 class="font-bold text-md"> Data Anda Di Tolak</h1>

@@ -30,7 +30,7 @@
                             <h1
                                 class="bg-base border-2 text-primary border-primary px-3 font-bold rounded-lg py-1  text-sm mt-2 capitalize">
                                 {{ $data->type }}</h1>
-                            <h1 class="italic text-xs font-medium mt-2 text-red-500"> Sisa {{ $data->quantity }} Kamar</h1>
+                            <h1 class="italic text-xs font-medium mt-2 text-red-500"> Sisa {{ $data->total_rooms }} Kamar</h1>
                         </div>
                         <div class="mt-2">
                             <h1>{{ Str::limit($data->name, 40) }}</h1>

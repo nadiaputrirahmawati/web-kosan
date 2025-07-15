@@ -37,12 +37,12 @@
             <div class="flex justify-between w-full">
                 <div class="flex space-x-3">
                     <div>
-                        @forelse ($data->room->galleries as $gallery)
-                            <img src="{{ asset('storage/' . $gallery->first()->image_url) }}" alt="foto kamar"
+                        @if ($data->room->galleries->isNotEmpty())
+                            <img src="{{ asset('storage/' . $data->room->galleries->first()->image_url) }}" alt="foto kamar"
                                 class="w-full h-24 object-cover rounded">
-                        @empty
+                        @else
                             <span class="col-span-3 text-xs text-gray-400">Belum ada foto</span>
-                        @endforelse
+                        @endif
                     </div>
 
                     <div class="mt-4">
@@ -76,14 +76,17 @@
                 @if ($data->status === 'cancelled')
                     <div class="mt-2 p-3 bg-red-50 border border-red-600 rounded-lg ">
                         <p>
-                            Pengajuan Sewa Anda Di batalkan!, <span class="italic font-semibold text-red-800">Silahkan Lakukan Pengajuan Kamar Baru</span>
+                            Pengajuan Sewa Anda Di batalkan!, <span class="italic font-semibold text-red-800">Silahkan
+                                Lakukan Pengajuan Kamar Baru</span>
                         </p>
                     </div>
-                @elseif($data->payment->status === 'completed')
+                @elseif($data->deposit_status === 'completed')
                     <div class="mt-2 p-3 bg-yellow-50 border border-yellow-600 rounded-lg ">
                         <p>
                             Yeay! Selamat datang di kos kami! 🎉 Terima kasih Telah memilih kami. Jangan lupa datang H-1
-                            untuk lihat lokasi dan check-in dengan barcode yang tersedia ya! <a href="" class="font-semibold text-red-500 underline italic text-sm">Cek Barcode di sini</a> <span> Selamat bersiap pindah ke
+                            untuk lihat lokasi dan check-in dengan barcode yang tersedia ya! <a href=""
+                                class="font-semibold text-red-500 underline italic text-sm">Cek Barcode di sini</a> <span>
+                                Selamat bersiap pindah ke
                                 kos baru!</span>
                         </p>
 

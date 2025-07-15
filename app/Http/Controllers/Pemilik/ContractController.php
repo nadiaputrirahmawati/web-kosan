@@ -43,7 +43,7 @@ class ContractController extends Controller
             'verification_contract' => 'completed'
         ]);
         notyf()->success('Verifikasi Berhasil');
-        return redirect()->route('owner.contract');
+        return redirect()->route('rooms.contract.index');
     }
 
     public function tolak(Request $request, $id)
@@ -54,6 +54,6 @@ class ContractController extends Controller
             'verification_contract' => 'rejected'
         ]);
         notyf()->success('Verifikasi Berhasil');
-        return redirect()->route('owner.contract');
+        return redirect()->route('rooms.contract.index');
     }
 }

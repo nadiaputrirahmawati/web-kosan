@@ -29,6 +29,7 @@ Route::prefix('user', 'as', 'user.')->middleware(['auth', 'role:user'])->group(f
     Route::get('/user/room/{id}/show', [RoomController::class, 'show'])->name('user.room.show');
     Route::get('/user/room/checkin/{id}', [RoomController::class, 'checkin'])->name('user.contract.checkin');
     Route::get('/user/contract/{contract}/download', [RoomController::class, 'downloadPDF'])->name('user.contract.download');
+    Route::post('/user/contract/{contract}/new', [ContractController::class, 'createSewa'])->name('user.contract.newcontract');
 
 
 });

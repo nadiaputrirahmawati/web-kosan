@@ -15,7 +15,6 @@ class ContractController extends Controller
 
     public function index()
     {
-
         $contracts = Contract::with(['room.owner', 'payment']) // eager load room dan owner dari room
             ->where('user_id', Auth::user()->user_id)
             ->latest()
@@ -100,6 +99,42 @@ class ContractController extends Controller
         $contract->status = 'cancelled';
         $contract->save();
         notyf()->success('Penarikan Deposit Berhasil Ditolak');
+        return redirect()->back();
+    }
+
+    public function createSewa(Request $request, $id)
+    {
+        $oldContract = Contract::where('contract_id', $id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        if ($oldContract->status !== 'active') {
+            return back()->withErrors(['Kontrak tidak bisa diperpanjang karena status tidak aktif.']);
+        }
+
+        // Hitung sisa hari dari kontrak lama
+        $remainingDays = now()->diffInDays($oldContract->end_date, false); // false agar dapat nilai negatif jika sudah lewat
+
+        if ($remainingDays > 7) {
+            return back()->withErrors(['Perpanjangan hanya dapat dilakukan ketika masa kontrak tersisa kurang dari 7 hari.']);
+        }
+
+        // Buat kontrak baru
+        $newContract = Contract::create([
+            'contract_id'            => Str::uuid(),
+            'owner_id'               => $oldContract->owner_id,
+            'user_id'                => $oldContract->user_id,
+            'room_id'                => $oldContract->room_id,
+            'start_date'             => now(),
+            'end_date'               => now()->addMonth(),
+            'verification_contract'  => 'completed',
+            'signature'              => $oldContract->signature,
+            'status'                 => 'active',
+            'deposit_amount'         => $oldContract->deposit_amount,
+            'deposit_status'         => 'pending',
+        ]);
+
+        notyf()->success('Berhasil Menambahkan Kontrak Baru');
         return redirect()->back();
     }
 }
