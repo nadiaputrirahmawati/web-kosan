@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('withdrawal_id')->primary();
             $table->uuid('owner_id');
             $table->bigInteger('amount');
-            $table->varchar('proof');
+            $table->string('proof');
             $table->enum('status', ['pending', 'completed']);
             $table->timestamps();
 
