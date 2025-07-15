@@ -18,8 +18,8 @@ class Complaint extends Model
     protected $fillable = [
         'user_id',
         'room_id',
-        'title',
         'description',
+        'complaint_feedback',
         'status',
     ];
     protected static function boot()
@@ -31,5 +31,15 @@ class Complaint extends Model
                 $model->{$model->getKeyName()} = (string) Str::uuid();
             }
         });
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(Rooms::class, 'room_id', 'room_id');
     }
 }

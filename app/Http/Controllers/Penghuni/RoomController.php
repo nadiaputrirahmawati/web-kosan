@@ -13,13 +13,21 @@ class RoomController extends Controller
 {
     public function index()
     {
-        $room = Contract::with(['room.owner', 'payment'])
-            ->where('user_id', Auth::id())->get();
-        if (!$room) {
-            return view('user.room.index')->with('message', 'Belum ada kontrak aktif');
+        $data = Contract::with(['room.owner', 'payment'])
+            ->where('user_id', Auth::id())
+            ->whereHas('payment', fn($q) => $q->where('status', 'completed'))
+            ->latest()
+            ->first();                    // 🔄 jadi single model, bukan collection
+        if ($data === null) {
+            notyf()->info('Belum ada kontrak aktif.');
+            return redirect()->route('user.contract');
+            // return view('user.room.index')->with('message', 'Belum ada kontrak aktif');
         }
 
-        return view('user.room.index', compact('room'));
+        $checkInUrl = route('user.contract.checkin', $data->contract_id);
+        $qrCode     = QrCode::size(100)->generate($checkInUrl);
+
+        return view('user.room.index', compact('data', 'qrCode'));
     }
 
     public function show($id)

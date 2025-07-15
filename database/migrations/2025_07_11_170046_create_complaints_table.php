@@ -15,8 +15,8 @@ return new class extends Migration
             $table->uuid('complaint_id')->primary();
             $table->uuid('user_id');
             $table->uuid('room_id');
-            $table->string('title');
             $table->text('description');
+            $table->text('complaint_feedback')->nullable();
             $table->enum('status', ['sent_in', 'in_process', 'completed']);
             $table->timestamps();
 

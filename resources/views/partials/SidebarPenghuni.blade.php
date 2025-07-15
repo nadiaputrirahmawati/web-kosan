@@ -42,9 +42,9 @@
                         <span class="whitespace-nowrap ml-4">Riwayat Pengajuan Sewa</span>
                     </a>
                 </li>
-                <li class="relative font-medium py-3 px-5 flex items-center gap-3 {{ request()->is('user/room/complaint') ? 'bg-gradient-to-r from-tertiary to-quaternary text-primary font-semibold rounded-lg' : 'text-primary hover:font-semibold' }}">
-                    <a class="flex items-center text-sm" href="{{ url('user/room/favorite') }}">
-                        <i class="fas fa-cubes text-xl"></i>
+                <li class="relative font-medium py-3 px-5 flex items-center gap-3 {{ request()->is('user/complaints*') ? 'bg-gradient-to-r from-tertiary to-quaternary text-primary font-semibold rounded-lg' : 'text-primary hover:font-semibold' }}">
+                    <a class="flex items-center text-sm" href="{{ url('user/complaints') }}">
+                        <i class="fas fa-comments text-xl"></i>
                         <span class="whitespace-nowrap ml-4">Complaint</span>
                     </a>
                 </li>

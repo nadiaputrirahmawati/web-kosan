@@ -80,16 +80,12 @@
                                 Lakukan Pengajuan Kamar Baru</span>
                         </p>
                     </div>
-                @elseif($data->deposit_status === 'completed')
+                @elseif($data->payment?->status === 'completed')
                     <div class="mt-2 p-3 bg-yellow-50 border border-yellow-600 rounded-lg ">
                         <p>
                             Yeay! Selamat datang di kos kami! 🎉 Terima kasih Telah memilih kami. Jangan lupa datang H-1
-                            untuk lihat lokasi dan check-in dengan barcode yang tersedia ya! <a href=""
-                                class="font-semibold text-red-500 underline italic text-sm">Cek Barcode di sini</a> <span>
-                                Selamat bersiap pindah ke
-                                kos baru!</span>
+                            untuk lihat lokasi dan check-in dengan barcode yang tersedia ya! <a href="" class="font-semibold text-red-500 underline italic text-sm">Cek Barcode di sini</a> <span> Selamat bersiap pindah ke kos baru!</span>
                         </p>
-
                     </div>
                 @elseif ($data->signature === null)
                     <div class="flex justify-end space-x-3 mt-5">

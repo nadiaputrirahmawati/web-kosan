@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Penghuni\ContractController;
-use App\Http\Controllers\penghuni\PaymentController;
-use App\Http\Controllers\Penghuni\PenghuniController;
-use App\Http\Controllers\Penghuni\ProfileController;
-use App\Http\Controllers\penghuni\RoomController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\penghuni\RoomController;
+use App\Http\Controllers\penghuni\PaymentController;
+use App\Http\Controllers\Penghuni\ProfileController;
+use App\Http\Controllers\Penghuni\ContractController;
+use App\Http\Controllers\Penghuni\PenghuniController;
 
 
 // Route::group(['prefix' => 'penghuni'], function () {
@@ -30,6 +31,11 @@ Route::prefix('user', 'as', 'user.')->middleware(['auth', 'role:user'])->group(f
     Route::get('/user/room/checkin/{id}', [RoomController::class, 'checkin'])->name('user.contract.checkin');
     Route::get('/user/contract/{contract}/download', [RoomController::class, 'downloadPDF'])->name('user.contract.download');
     Route::post('/user/contract/{contract}/new', [ContractController::class, 'createSewa'])->name('user.contract.newcontract');
+
+    //Complaint Area
+    Route::get('complaints', [ComplaintController::class, 'indexUserComplaint'])->name('user.complaints.index');
+    Route::get('complaints/create', [ComplaintController::class, 'create'])->name('user.complaints.create');
+    Route::post('complaints', [ComplaintController::class, 'store'])->name('user.complaints.store');
 
 
 });
