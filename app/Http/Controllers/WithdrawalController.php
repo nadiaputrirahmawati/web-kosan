@@ -64,7 +64,7 @@ class WithdrawalController extends Controller
         $user = Auth::user();
         $withdrawals = Withdrawal::where('owner_id', $user->user_id)->latest()->get();
 
-        return view('owner.withdrawals.index', compact('user', 'withdrawals'));
+        return view('pemilik.withdrawals.index', compact('user', 'withdrawals'));
     }
 
     public function create()
@@ -75,7 +75,7 @@ class WithdrawalController extends Controller
             ->where('status', 'pending')
             ->exists();
 
-        return view('owner.withdrawals.create', compact('user', 'pendingWithdrawal'));
+        return view('pemilik.withdrawals.create', compact('user', 'pendingWithdrawal'));
     }
 
     public function store(Request $request)
