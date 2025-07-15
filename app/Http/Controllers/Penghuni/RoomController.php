@@ -18,9 +18,10 @@ class RoomController extends Controller
             ->whereHas('payment', fn($q) => $q->where('status', 'completed'))
             ->latest()
             ->first();                    // 🔄 jadi single model, bukan collection
-
-        if (!$data) {
-            return view('user.room.index')->with('message', 'Belum ada kontrak aktif');
+        if ($data === null) {
+            notyf()->info('Belum ada kontrak aktif.');
+            return redirect()->route('user.contract');
+            // return view('user.room.index')->with('message', 'Belum ada kontrak aktif');
         }
 
         $checkInUrl = route('user.contract.checkin', $data->contract_id);
