@@ -4,9 +4,6 @@
     <div class="flex justify-between">
         <h1 class="text-primary font-extrabold text-xl mb-2">Pengajuan Sewa Kamar</h1>
     </div>
-
-    
-
     @forelse ($contracts as $data)
         <div class="bg-white shadow-sm rounded-xl p-3 mt-2">
             <div class="flex justify-between w-full">

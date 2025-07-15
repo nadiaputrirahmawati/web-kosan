@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('ktp_picture_person')->nullable();
             $table->enum('status_verification', ['pending', 'verified', 'reject'])->nullable();
             $table->text('rejection_feedback')->nullable();
+            $table->bigInteger('belance')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['admin', 'owner', 'user'])->default('user');

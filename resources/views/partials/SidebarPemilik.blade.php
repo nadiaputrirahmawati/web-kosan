@@ -37,9 +37,9 @@
                 </li>
             </ul>
             <ul class="mt-2">
-                <li class="relative font-medium py-3 px-7 flex items-center gap-3 {{ request()->is('/product') ? 'bg-gradient-to-r from-purple-100 to-transparent  font-semibold' : 'text-primary hover:font-semibold' }}"
+                <li class="relative font-medium py-3 px-7 flex items-center gap-3 {{ request()->is('owner/withdrawals*') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold' }}"
                     :class="{ 'justify-center': isSidebarCollapsed }">
-                    <a class="flex items-center text-sm  " href="{{ url('') }}">
+                    <a class="flex items-center text-sm" href="{{ url('owner/withdrawals') }}">
                         <i class="fas fa-cubes text-xl"></i>
                         <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Pendapatan</span>
                     </a>
