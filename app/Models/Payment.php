@@ -18,11 +18,11 @@ class Payment extends Model
     protected $fillable = [
         'user_id',
         'contract_id',
-        'amout',
+        'amount',
         'status',
         'payment_date',
         'snap_token',
-        'payment_token',
+        'order_id',
     ];
     protected static function boot()
     {

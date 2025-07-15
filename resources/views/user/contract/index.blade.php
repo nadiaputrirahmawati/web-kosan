@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="text-primary font-extrabold text-xl mb-4">Riwayat Pengajuan Sewa Kost</h1>
     @forelse ($contracts as $data)
-        <div class="bg-white shadow-sm rounded-xl p-3 mt-2">
+        <div class="bg-white shadow rounded-xl p-3 mt-2">
             <div class="flex justify-between mt-2 mb-4">
                 <div>
                     <h1 class="text-sm font-semibold"><span><i
@@ -81,17 +81,25 @@
                         </a>
                     </div>
                     <div>
-                        <a href="/owner/room/contract/{{ $data->user->user_id }}/show"
-                            class="bg-primary px-3 font-bold rounded-lg py-2 text-white text-sm">
-                            Bayar Kost
-                        </a>
+                        <form action="{{ route('user.contract.payment') }}" method="post">
+                            @csrf
+                            @method('POST')
+                            <input type="text" name="price" value="{{ $data->room->price }}" hidden id="">
+                            <input type="text" name="name" value="{{ $data->room->name }}" hidden id="">
+                            <input type="text" name="contract_id" value="{{ $data->contract_id }}" hidden id="">
+                            <button type="submit"
+                                class="bg-primary px-3 font-bold rounded-lg py-2 text-white text-sm">
+                                Bayar Kost
+                            </button>
+                        </form>
+
                     </div>
                 </div>
             @elseif ($data->verification_contract == 'rejected')
-               <div class="bg-red-50 border border-red-700 p-3 rounded-lg mt-3">
+                <div class="bg-red-50 border border-red-700 p-3 rounded-lg mt-3">
                     <h1 class="text-xs font-bold"> Pengajuan Sewa Kamu Di Tolak Karena : </h1>
                     <p>{{ $data->rejection_feedback }}</p>
-               </div>
+                </div>
             @endif
 
         </div>
