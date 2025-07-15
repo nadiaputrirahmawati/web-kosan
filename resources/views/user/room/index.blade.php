@@ -11,7 +11,7 @@
                 </h1>
             </div>
             <div>
-                <a href=""
+                <a href="{{ route('user.room.show', $data->contract_id) }}"
                     class="text-sm font-semibold text-primary bg-base py-2 px-3 border border-primary rounded-lg"> Detail
                     Kost</a>
             </div>
