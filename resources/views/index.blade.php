@@ -16,7 +16,7 @@
     </section>
 
     <section class="py-16 p-3 bg-white">
-        <div class="w-full grid grid-cols-3 gap-4">
+        <div class="w-full grid grid-cols-4 gap-4">
             @forelse ($room as $data)
                 <a href="{{ route('user.rooms.show', $data->room_id) }}">
                     <div class="p-2 rounded-xl">
@@ -27,10 +27,33 @@
                             <img src="{{ asset('img/gambarkos.png') }}" class="w-full object-cover rounded" alt="">
                         @endif
                         <div class="flex space-x-3">
+                            @php
+                                // Tentukan warna background dan teks berdasarkan tipe
+                                $bgColor = '';
+                                $textColor = '';
+
+                                if ($data->type === 'putri') {
+                                    $bgColor = 'bg-pink-100';
+                                    $textColor = 'text-pink-600';
+                                } elseif ($data->type === 'putra') {
+                                    $bgColor = 'bg-blue-100';
+                                    $textColor = 'text-blue-600';
+                                } elseif ($data->type === 'campur') {
+                                    $bgColor = 'bg-yellow-100';
+                                    $textColor = 'text-yellow-600';
+                                } else {
+                                    // fallback default
+                                    $bgColor = 'bg-gray-100';
+                                    $textColor = 'text-gray-600';
+                                }
+                            @endphp
+
                             <h1
-                                class="bg-base border-2 text-primary border-primary px-3 font-bold rounded-lg py-1  text-sm mt-2 capitalize">
-                                {{ $data->type }}</h1>
-                            <h1 class="italic text-xs font-medium mt-2 text-red-500"> Sisa {{ $data->total_rooms }} Kamar</h1>
+                                class="{{ $bgColor }} {{ $textColor }} px-3 font-bold rounded-lg py-1 text-sm mt-2 capitalize">
+                                {{ $data->type }}
+                            </h1>
+                            <h1 class="italic text-xs font-medium mt-2 text-red-500"> Sisa
+                                {{ $data->occupied_rooms ?? $data->total_rooms }} Kamar</h1>
                         </div>
                         <div class="mt-2">
                             <h1>{{ Str::limit($data->name, 40) }}</h1>

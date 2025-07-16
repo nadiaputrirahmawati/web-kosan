@@ -34,7 +34,7 @@
     </style>
 </head>
 
-<body class="bg-gray-50 text-gray-800">
+<body class=" text-gray-800">
     @include('partials.Navbar')
 
     <main class="pt-16">
