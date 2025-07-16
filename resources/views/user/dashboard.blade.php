@@ -1,5 +1,14 @@
 @extends('layout.Penghuni')
-@section('title', 'Home')
 @section('content')
-    <h1> Dashboard</h1>
+    <div>
+        <h1 class="text-primary font-extrabold text-xl mb-4">Dashboard Kos {{ Auth::user()->name }}</h1>
+        <div class="flex w-full">
+            <div>
+
+            </div>
+            <div>
+                
+            </div>
+        </div>
+    </div>
 @endsection

@@ -22,8 +22,7 @@
                             $imageUrl = asset('storage/' . $gallery->image_url);
                         @endphp
                         <template x-if="activeImage !== '{{ $imageUrl }}'">
-                            <img src="{{ $imageUrl }}"
-                                class="w-full h-[160px] object-cover rounded cursor-pointer"
+                            <img src="{{ $imageUrl }}" class="w-full h-[160px] object-cover rounded cursor-pointer"
                                 alt="Thumbnail" @click="activeImage = '{{ $imageUrl }}'">
                         </template>
                     @endforeach
@@ -45,16 +44,31 @@
         <div class="w-7/12 overflow-y-auto">
             {{-- Detail Kamar --}}
             <div class=" p-6 mt-4">
-                <h1 class="text-sm font-semibold text-gray-800 mt-2">Nama Kamar</h1>
-                <h1 class="text-2xl font-bold mt-1">{{ $room->name }}</h1>
-                <h1 class="text-sm"><i class="fa-light fa-location-dot mr-1 ml-2 mt-1"></i> {{ $room->address }}</h1>
+                <h1 class="text-3xl font-bold mt-1">{{ $room->name }}</h1>
+                <div class="flex mt-4">
+                    <h1 class="bg-base text-primary px-3 py-1 rounded-lg text-md font-bold capitalize">Kos
+                        {{ $room->type }}</h1>
+                    <h1 class="text-md"><i class="fa-light fa-location-dot mr-1 ml-2 mt-1"></i> {{ $room->address }}</h1>
+                </div>
 
-                <h1
-                    class="text-sm font-semibold text-gray-800 bg-orange-50 border-orange-400 border px-3 py-1 text-center rounded-lg">
-                    Informasi Kamar
-                </h1>
+                <div class="mt-5 flex justify-between w-full">
+                    <div>
+                        <h1 class="text-lg text-black"> <i class="fa-light fa-door-open mr-3"></i> Simpan Dulu Kos Ini Yuk
+                        </h1>
+                    </div>
+                    <div>
+                        <form action="{{ route('favorite.save') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="room_id" value="{{ $room->room_id }}" id="">
+                            <button type="submit"
+                                class="bg-base lg:px-5 px-2 font-bold rounded-lg py-2 text-primary text-sm hover:bg-primary/90 hover:text-white transition">
+                                <i class="fa-light fa-heart mr-2"></i> Simpan
+                            </button>
+                        </form>
+                    </div>
+                </div>
 
-                <div class="flex flex-col justify-between mt-3 space-y-3">
+                <div class="flex flex-col justify-between  space-y-3 mt-5">
                     {{-- Type --}}
                     <div class="flex">
                         <i class="fa-light fa-users mr-2 bg-base text-primary px-3 py-2 rounded-lg text-xs"></i>

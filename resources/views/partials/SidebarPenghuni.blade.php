@@ -48,8 +48,8 @@
                         <span class="whitespace-nowrap ml-4">Complaint</span>
                     </a>
                 </li>
-                <li class="relative font-medium py-3 px-5 flex items-center gap-3 {{ request()->is('user/room/favorite') ? 'bg-gradient-to-r from-tertiary to-quaternary text-primary font-semibold rounded-lg' : 'text-primary hover:font-semibold' }}">
-                    <a class="flex items-center text-sm" href="{{ url('user/room/favorite') }}">
+                <li class="relative font-medium py-3 px-5 flex items-center gap-3 {{ request()->is('user/favorite') ? 'bg-gradient-to-r from-tertiary to-quaternary text-primary font-semibold rounded-lg' : 'text-primary hover:font-semibold' }}">
+                    <a class="flex items-center text-sm" href="{{ url('user/favorite') }}">
                         <i class="fas fa-cubes text-xl"></i>
                         <span class="whitespace-nowrap ml-4">Simpan Kost</span>
                     </a>
@@ -74,7 +74,7 @@
             <i class="fa-solid fa-chart-simple text-lg"></i>
             <span class="text-[11px] mt-1">Riwayat</span>
         </a>
-        <a href="{{ url('user/room/favorite') }}" class="flex flex-col items-center justify-center {{ request()->is('user/room/favorite') ? 'text-primary' : '' }}">
+        <a href="{{ url('user/favorite') }}" class="flex flex-col items-center justify-center {{ request()->is('user/favorite') ? 'text-primary' : '' }}">
             <i class="fas fa-cubes text-lg"></i>
             <span class="text-[11px] mt-1">Simpan</span>
         </a>

@@ -49,12 +49,13 @@
                                     <h1 class="text-xs text-gray-500">{{ Auth::user()->email }}</h1>
                                 </div>
                             </div>
-                            <a href="#" class="block text-sm pt-3">View Profile</a>
-                            <a href="#" class="block text-sm">Account Settings</a>
+                            <a href="{{ route('user.profile.update') }}" class="block text-sm pt-3"><i class="fa-light fa-user mr-3"></i>View Profile</a>
+                            <a href="{{ route('user.room') }}" class="block text-sm mt-2"><i class="fa-light fa-door-open mr-3"></i>Kos Saya</a>
+                            <a href="{{ route('user.favorite') }}" class="block text-sm mt-2"><i class="fa-light fa-heart mr-3"></i>Kost Tersimpan</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
-                                    class="text-sm text-red-600 hover:text-red-700 mt-2">Logout</button>
+                                    class="text-sm mt-3 bg-red-100 text-center px-1 w-full py-1 rounded-lg text-red-600 hover:text-red-700">Logout</button>
                             </form>
                         </div>
                     </div>
@@ -107,7 +108,7 @@
                                     <h1 class="text-xs text-gray-500">{{ Auth::user()->email }}</h1>
                                 </div>
                             </div>
-                            <a href="#" class="block text-sm pt-3">View Profile</a>
+                            <a href="#" class="block text-sm pt-3"><i class="fa-light fa-user mr-2"></i> View Profile</a>
                             <a href="#" class="block text-sm">Account Settings</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

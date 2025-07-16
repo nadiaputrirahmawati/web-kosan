@@ -29,4 +29,9 @@ class Favorite extends Model
             }
         });
     }
+
+    public function room()
+    {
+        return $this->belongsTo(Rooms::class, 'room_id', 'room_id');
+    }
 }

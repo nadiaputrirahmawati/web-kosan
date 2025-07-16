@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorite;
 use App\Models\Gallery;
 use App\Models\Rooms;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LandingPageController extends Controller
 {
