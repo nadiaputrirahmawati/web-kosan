@@ -21,9 +21,7 @@ Route::prefix('user', 'as', 'user.')->middleware(['auth', 'role:user'])->group(f
     })->name('profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('user.profile.update');
 
-    
-    
-    Route::get('/dashboard', function () {return view('user.dashboard');})->name('user.dashboard');
+    Route::get('/dashboard', [PenghuniController::class, 'dashboard'])->name('user.dashboard');
     
     // Kontrak Saya
     Route::post('room/contract', [ContractController::class, 'store'])->name('user.contract.store')->middleware('check-sewa');
