@@ -112,6 +112,16 @@
             {{-- Kanan: Sticky Informasi Kamar --}}
             <div class="w-5/12 mt-5">
                 <div class="bg-white shadow rounded-lg p-5 sticky top-24">
+                   @if (session('error'))
+                        <div class="mb-4">
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                                role="alert">
+                                <strong class="font-bold">Oops!</strong>
+                                <span class="block sm:inline">Ada beberapa kesalahan:</span>
+                                {{ session('error') }}
+                            </div>
+                        </div>
+                    @endif
                     <h1 class="font-bold text-xl">Rp. {{ number_format($room->price, 0, ',', '.') }} / Bulan </h1>
                     <h1>Deposito: Rp. {{ number_format($room->deposit_amount, 0, ',', '.') }}</h1>
 

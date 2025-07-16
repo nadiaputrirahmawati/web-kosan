@@ -38,8 +38,9 @@ class ContractController extends Controller
         Contract::create([
             'contract_id'          => Str::uuid(),
             'user_id'              => Auth::user()->user_id,
+            'status'                => 'pending_payment',
             'verification_contract' => 'pending',
-            'deposit_status'       => 'pending',
+            'contract_type'         => 'initial',
             'deposit_amount'       => $validated['deposit_amount'],
             'start_date'           => $validated['start_date'],
             'end_date'             => $endDate,
@@ -102,39 +103,47 @@ class ContractController extends Controller
         return redirect()->back();
     }
 
-    public function createSewa(Request $request, $id)
+    public function perpanjangSewa(Request $request, $id)
     {
+        $userId = Auth::id();
+
+        // Ambil kontrak lama
         $oldContract = Contract::where('contract_id', $id)
-            ->where('user_id', Auth::id())
+            ->where('user_id', $userId)
             ->firstOrFail();
 
+        // 1. Validasi status kontrak lama
         if ($oldContract->status !== 'active') {
-            return back()->withErrors(['Kontrak tidak bisa diperpanjang karena status tidak aktif.']);
+            return back()->withErrors(['Kontrak lama tidak aktif. Tidak dapat diperpanjang.']);
         }
 
-        // Hitung sisa hari dari kontrak lama
-        $remainingDays = now()->diffInDays($oldContract->end_date, false); // false agar dapat nilai negatif jika sudah lewat
-
+        // 2. Hitung sisa hari dari kontrak lama
+        $remainingDays = now()->diffInDays($oldContract->end_date, false);
         if ($remainingDays > 7) {
-            return back()->withErrors(['Perpanjangan hanya dapat dilakukan ketika masa kontrak tersisa kurang dari 7 hari.']);
+            return back()->withErrors(['Perpanjangan hanya dapat dilakukan jika sisa kontrak kurang dari 7 hari.']);
         }
 
-        // Buat kontrak baru
+
+        // 3. Buat kontrak baru (tipe renewal)
         $newContract = Contract::create([
-            'contract_id'            => Str::uuid(),
-            'owner_id'               => $oldContract->owner_id,
-            'user_id'                => $oldContract->user_id,
-            'room_id'                => $oldContract->room_id,
-            'start_date'             => now(),
-            'end_date'               => now()->addMonth(),
-            'verification_contract'  => 'completed',
-            'signature'              => $oldContract->signature,
-            'status'                 => 'active',
-            'deposit_amount'         => $oldContract->deposit_amount,
-            'deposit_status'         => 'pending',
+            'contract_id'           => Str::uuid(),
+            'owner_id'              => $oldContract->owner_id,
+            'user_id'               => $oldContract->user_id,
+            'room_id'               => $oldContract->room_id,
+            'start_date'            => now(),
+            'end_date'              => now()->addMonth(),
+            'verification_contract' => 'completed',
+            'signature'             => $oldContract->signature,
+            'status'                => 'pending_payment', // atau 'completed' jika ingin diaktifkan setelah dibayar
+            'deposit_amount'        => 0,
+            'contract_type'         => 'renewal',
         ]);
 
-        notyf()->success('Berhasil Menambahkan Kontrak Baru');
+        // 4. Update status kontrak lama ke 'in_renewal'
+        $oldContract->update(['status' => 'in_renewal']);
+
+        notyf()->success('Perpanjangan kontrak berhasil dibuat.');
+
         return redirect()->back();
     }
 }

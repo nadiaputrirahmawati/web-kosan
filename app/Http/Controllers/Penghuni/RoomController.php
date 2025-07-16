@@ -13,22 +13,31 @@ class RoomController extends Controller
 {
     public function index()
     {
-        $data = Contract::with(['room.owner', 'payment'])
+        $room = Contract::with(['room.owner', 'payment'])
             ->where('user_id', Auth::id())
-            ->whereHas('payment', fn($q) => $q->where('status', 'completed'))
-            ->latest()
-            ->first();                    // 🔄 jadi single model, bukan collection
-        if ($data === null) {
-            notyf()->info('Belum ada kontrak aktif.');
-            return redirect()->route('user.contract');
-            // return view('user.room.index')->with('message', 'Belum ada kontrak aktif');
-        }
+            ->orderByDesc('start_date')->latest()
+            ->get();
+        $kontrak = Contract::where('user_id', Auth::id())
+                // ->where('room_id', $room->room_id)
+                ->where('contract_type', 'initial')
+                // ->where('start_date', '>', $room->end_date)
+                // ->whereHas('payment', fn($q) => $q->where('status', 'completed'))
+                ->exists();
+        // dd($kontrak);
 
-        $checkInUrl = route('user.contract.checkin', $data->contract_id);
-        $qrCode     = QrCode::size(100)->generate($checkInUrl);
+        // Loop setiap kontrak dan tandai apakah sudah diperpanjang
+        // foreach ($room as $contract) {
+        //     $contract->has_extended = Contract::where('user_id', $contract->user_id)
+        //         ->where('room_id', $contract->room_id)
+        //         ->where('contract_type', 'renewal')
+        //         ->where('start_date', '>', $contract->end_date)
+        //         ->whereHas('payment', fn($q) => $q->where('status', 'completed'))
+        //         ->exists();
+        // }
 
-        return view('user.room.index', compact('data', 'qrCode'));
+        return view('user.room.index', compact('room', 'kontrak'));
     }
+
 
     public function show($id)
     {

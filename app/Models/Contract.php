@@ -24,7 +24,7 @@ class Contract extends Model
         'status',
         'signature',
         'deposit_amount',
-        'deposit_status',
+        'contract_type',
         'verification_contract',
         'rejection_feedback',
     ];

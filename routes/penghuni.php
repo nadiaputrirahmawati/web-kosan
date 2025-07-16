@@ -18,19 +18,24 @@ Route::prefix('user', 'as', 'user.')->middleware(['auth', 'role:user'])->group(f
         return view('user.profile.index');
     })->name('profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('user.profile.update');
+
+    Route::get('/user/room/{id}/show', [RoomController::class, 'show'])->name('user.room.show');
     Route::post('room/contract', [ContractController::class, 'store'])->name('user.contract.store')->middleware('check-sewa');
+
+
     Route::get('room/contract', [ContractController::class, 'index'])->name('user.contract');
     Route::get('/dashboard', function () {
         return view('user.dashboard');
     })->name('user.dashboard');
+
     Route::get('room/contract/{id}/ttd', [ContractController::class, 'ttdKontrak'])->name('user.contract.ttd');
     Route::post('room/contract/{id}/ttd', [ContractController::class, 'createsignature'])->name('user.contract.signature.save');
     Route::post('room/contract/{id}/reject', [ContractController::class, 'reject'])->name('user.contract.signature.reject');
+
     Route::get('room', [RoomController::class, 'index'])->name('user.room');
-    Route::get('/user/room/{id}/show', [RoomController::class, 'show'])->name('user.room.show');
     Route::get('/user/room/checkin/{id}', [RoomController::class, 'checkin'])->name('user.contract.checkin');
     Route::get('/user/contract/{contract}/download', [RoomController::class, 'downloadPDF'])->name('user.contract.download');
-    Route::post('/user/contract/{contract}/new', [ContractController::class, 'createSewa'])->name('user.contract.newcontract');
+    Route::post('/user/contract/{contract}/new', [ContractController::class, 'perpanjangSewa'])->name('user.contract.newcontract');
 
     //Complaint Area
     Route::get('complaints', [ComplaintController::class, 'indexUserComplaint'])->name('user.complaints.index');

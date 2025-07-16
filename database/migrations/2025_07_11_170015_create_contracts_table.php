@@ -23,7 +23,7 @@ return new class extends Migration
             $table->bigInteger('deposit_amount')->nullable();
             $table->enum('verification_contract', ['pending', 'rejected', 'completed'])->nullable();
             $table->text('rejection_feedback')->nullable();
-            $table->enum('deposit_status', ['pending', 'completed', 'refund'])->nullable();
+            $table->enum('contract_type', ['initial', 'renewal'])->nullable();
             $table->timestamps();
             
             $table->foreign('owner_id')->references('user_id')->on('users')->onDelete('cascade');

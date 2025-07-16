@@ -26,7 +26,7 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
     Route::get('room/{id}/gallery', [GalleryController::class, 'index'])->name('rooms.gallery');
     Route::post('room/{id}/gallery', [GalleryController::class, 'store'])->name('rooms.gallery.store');
 
-    Route::get('room/contract', [ContractController::class, 'index'])->name('owner.contract');
+    Route::get('room/contract', [ContractController::class, 'index'])->name('rooms.contract.index');
     Route::get('room/contract/{id}/show', [ContractController::class, 'show']);
     Route::post('room/contract/{id}/verifikasi', [ContractController::class, 'verifikasi'])->name('rooms.contract.verifikasi');
     Route::put('room/contract/{id}/tolak', [ContractController::class, 'tolak'])->name('rooms.contract.reject');

@@ -27,14 +27,14 @@ class CheckSewa
             return redirect()->route('user.profile.update');
         }
 
-        // 3. Cek apakah ada kontrak status pending
-        $hasPendingContract = Contract::where('user_id', Auth::user()->user_id)
-            ->where('verification_contract', 'pending')
+        $hasRestrictedContract = Contract::where('user_id', Auth::user()->user_id)
+            ->whereIn('verification_contract', ['pending', 'completed'])
             ->exists();
+        // dd($hasRestrictedContract);
 
-        if ($hasPendingContract) {
-            // Redirect atau tampilkan error/flash message jika perlu
-            notyf()->error('Anda masih memiliki kontrak yang belum selesai');
+        if ($hasRestrictedContract) {
+            // Blokir akses, bisa redirect atau response error
+            notyf()->error('Anda tidak bisa sewa lagi karena masih memiliki kontrak yang sedang diproses atau aktif.');
             return redirect()->back();
         }
 
