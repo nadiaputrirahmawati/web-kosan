@@ -56,4 +56,21 @@ class ContractController extends Controller
         notyf()->success('Verifikasi Berhasil');
         return redirect()->route('rooms.contract.index');
     }
+
+    public function checkin(Request $request)
+    {
+        $id = $request['contract_id'];
+        $contract = Contract::where('contract_id', $id)->firstOrFail();
+        $contract->update([
+            'status' => 'active'
+        ]);
+        notyf()->success('Checkin Berhasil');
+        return redirect()->route('rooms.contract.index');
+    }
+
+    public function getCheckin($id)
+    {
+        $contract = Contract::with(['room.user', 'room.galleries'])->where('contract_id', $id)->firstOrFail();
+        return view('pemilik.contract.checkin', compact('contract'));
+    }
 }

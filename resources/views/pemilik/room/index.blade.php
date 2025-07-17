@@ -1,7 +1,7 @@
 @extends('layout.pemilik')
 
 @section('content')
-    <div class="flex justify-between">
+    <div class="flex lg:flex-row flex-col justify-between">
         <h1 class="text-primary font-extrabold text-xl mb-2">Kamar Kosan</h1>
         <div class="flex justify-end">
             <a href="/owner/room/create"
@@ -13,11 +13,11 @@
 
     @forelse ($Room as $data)
         <div class="bg-white shadow-sm rounded-xl p-3 mt-2">
-            <div class="flex justify-between w-full">
-                <div class="flex space-x-3">
+            <div class="flex lg:flex-row flex-col justify-between w-full">
+                <div class="flex  lg:flex-row flex-col lg:space-x-3 space-x-0">
                     @if ($data->galleries->isNotEmpty())
                         <img src="{{ asset('storage/' . $data->galleries->first()->image_url) }}"
-                            class="w-20 object-cover rounded" alt="Foto Kamar">
+                            class="lg:w-20 w-full object-cover rounded" alt="Foto Kamar">
                     @else
                         <p class="text-sm text-gray-400 italic">Belum ada foto kamar</p>
                     @endif
@@ -28,7 +28,7 @@
 
                     </div>
                 </div>
-                <div class="mt-4">
+                <div class="lg:justify-normal justify-end flex mt-4">
                     <a href="/owner/room/{{ $data->room_id }}/show"
                         class="bg-black px-3 font-bold rounded-lg py-2 text-white text-sm">
                         Manage
@@ -36,8 +36,8 @@
                 </div>
             </div>
             {{-- <hr class="border border-gray-100"> --}}
-            <div class="flex space-x-3 justify-between mt-3 ">
-                <div class="flex">
+            <div class="flex lg:flex-row flex-col lg:space-x-3 space-x-0 justify-between mt-3 ">
+                <div class="flex lg:mt-0 mt-2">
                     <div class="flex">
                         <div>
                             <i
@@ -49,19 +49,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex">
+                <div class="flex lg:mt-0 mt-2">
                     <div class="flex">
                         <div>
                             <i
                                 class="fa-light fa-door-open mr-2 bg-blue-100 text-blue-900 lg:px-3 lg:py-2 px-3 py-2 rounded-lg lg:text-sm text-xs"></i>
                         </div>
                         <div>
-                            <h1 class="font-bold text-xs">{{ $data->quantity }}</h1>
+                            <h1 class="font-bold text-xs">{{ $data->occupied_rooms ?? $data->total_rooms }}</h1>
                             <h1 class="text-[11px] font-semibold text-black">Kamar Tersedia</h1>
                         </div>
                     </div>
                 </div>
-                <div class="flex">
+                <div class="flex lg:mt-0 mt-2">
                     <div class="flex">
                         <div>
                             <i

@@ -23,11 +23,20 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
 
     // Tambah Kamar
     Route::get('room', [RoomController::class, 'index'])->name('rooms.index');
-    Route::get('room/create', [RoomController::class, 'create'])->name('rooms.create');
     Route::post('room', [RoomController::class, 'store'])->name('rooms.store');
+    Route::get('room/create', [RoomController::class, 'create'])->name('rooms.create');
+    Route::put('room/update/{id}', [RoomController::class, 'update'])->name('rooms.update');
+    Route::get('room/update/{id}', [RoomController::class, 'getUpdate'])->name('rooms.update.show');
     Route::get('room/{id}/show', [RoomController::class, 'show'])->name('rooms.show');
-    Route::get('room/{id}/gallery', [GalleryController::class, 'index'])->name('rooms.gallery');
+    Route::delete('room/{id}/delete', [RoomController::class, 'delete'])->name('rooms.destroy');
+
+    // Tambah Gambar
+    Route::get('room/gallery/{id}', [GalleryController::class, 'create'])->name('rooms.gallery');
     Route::post('room/{id}/gallery', [GalleryController::class, 'store'])->name('rooms.gallery.store');
+    // Route::get('room/gallery/{id}/edit', [GalleryController::class, 'edit'])->name('rooms.gallery.edit');
+    Route::delete('room/gallery/{id}', [GalleryController::class, 'destroy'])->name('rooms.gallery.delete');
+    // Route::put('room/gallery/{id}', [GalleryController::class, 'update'])->name('rooms.gallery.update');
+    
 
     // Verifikasi Kontrak
     Route::get('room/contract', [ContractController::class, 'index'])->name('rooms.contract.index');
@@ -39,5 +48,9 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
     Route::get('complaints', [ComplaintController::class,'index'])->name('owner.complaints.index');
     Route::get('complaints/{id}/edit', [ComplaintController::class,'edit'])->name('owner.complaints.edit');
     Route::put('complaints/{id}', [ComplaintController::class,'update'])->name('owner.complaints.update');
+
+    //Checkin
+    Route::post('/user/room/checkin', [ContractController::class, 'checkin'])->name('contract.checkin.save');
+    Route::get('/user/room/checkin/{id}', [ContractController::class, 'getCheckin'])->name('contract.checkin');
 
 });

@@ -20,8 +20,13 @@ class LandingPageController extends Controller
     public function show($id)
     {
         $room = Rooms::with('user', 'galleries')->find($id);
+        $favorite = Favorite::where('room_id', $room->room_id)->where('user_id', Auth::id())->first();
+        $isFavorited = Favorite::where('user_id', Auth::id())
+            ->where('room_id', $room->room_id)
+            ->exists();
+
         // dd($room);
-        return view('detailroom', compact('room'));
+        return view('detailroom', compact('room', 'isFavorited', 'favorite'));
     }
 
     public function gallery($id)

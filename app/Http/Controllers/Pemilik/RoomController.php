@@ -54,7 +54,6 @@ class RoomController extends Controller
             'address'        => $validated['address'],
             'description'    => $validated['description'] ?? null,
             'regulation'     => $validated['regulation'] ?? [], // array → JSON
-            'is_featured'    => $request->boolean('is_featured'),
         ]);
 
         return redirect()
@@ -69,5 +68,68 @@ class RoomController extends Controller
             ->firstOrFail();
 
         return view('pemilik.room.show', compact('room'));
+    }
+
+    public function edit($id)
+    {
+        $room = Rooms::findOrFail($id);
+        return view('pemilik.room.edit', compact('room'));
+    }
+
+    public function getUpdate($id) {
+        $room = Rooms::findOrFail($id);
+        return view('pemilik.room.edit', compact('room'));
+    }
+    public function update(Request $request, $id)
+    {
+        // 1) VALIDASI
+        $validated = $request->validate([
+            'name'              => 'required|string|max:255',
+            'price'             => 'required|numeric|min:0',
+            'total_rooms'       => 'required|integer|min:1',
+            'type'              => 'required|in:campur,putri,putra',
+            'deposit_amount'    => 'nullable|numeric|min:0',
+            'room_facility'     => 'nullable|array',
+            'room_facility.*'   => 'string|max:255',
+            'public_facility'   => 'nullable|array',
+            'public_facility.*' => 'string|max:255',
+            'address'           => 'required|string|max:255',
+            'description'       => 'nullable|string',
+            'regulation'        => 'nullable|array',
+            'regulation.*'      => 'string|max:255',
+        ]);
+
+        // 2) Ambil data kamar
+        $room = Rooms::findOrFail($id);
+
+        // Optional: cek otorisasi, pastikan hanya pemilik yang bisa update
+        if ($room->owner_id !== Auth::user()->user_id) {
+            abort(403, 'Akses ditolak');
+        }
+
+        // 3) Update record
+        $room->update([
+            'name'             => $validated['name'],
+            'price'            => $validated['price'],
+            'total_rooms'      => $validated['total_rooms'],
+            'type'             => $validated['type'],
+            'deposit_amount'   => $validated['deposit_amount'] ?? 0,
+            'room_facility'    => $validated['room_facility'] ?? null,
+            'public_facility'  => $validated['public_facility'] ?? null,
+            'address'          => $validated['address'],
+            'description'      => $validated['description'] ?? null,
+            'regulation'       => $validated['regulation'] ?? [],
+        ]);
+
+        return redirect()
+            ->route('rooms.gallery', ['id' => $room->room_id])
+            ->with('success', 'Kamar berhasil diperbarui.');
+    }
+
+    public function delete($id) {
+        $room = Rooms::findOrFail($id);
+        $room->delete();
+        notyf()->success('Kamar berhasil dihapus.');
+        return redirect()->route('rooms.index');
     }
 }

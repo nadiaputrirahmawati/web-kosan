@@ -42,7 +42,7 @@ class FavoriteController extends Controller
 
         notyf()->success('Room Favorit Berhasil Ditambahkan');
 
-        return redirect()->route('user.favorite');
+        return redirect()->back();
     }
 
     public function unfavorite($id)

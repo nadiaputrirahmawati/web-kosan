@@ -57,15 +57,30 @@
                         </h1>
                     </div>
                     <div>
-                        <form action="{{ route('favorite.save') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="room_id" value="{{ $room->room_id }}" id="">
-                            <button type="submit"
-                                class="bg-base lg:px-5 px-2 font-bold rounded-lg py-2 text-primary text-sm hover:bg-primary/90 hover:text-white transition">
-                                <i class="fa-light fa-heart mr-2"></i> Simpan
-                            </button>
-                        </form>
+                        {{-- Jika sudah favorit --}}
+                        @if ($isFavorited)
+                            <form action="{{ route('favorite.delete',$favorite?->favorite_id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="room_id" value="{{ $room->room_id }}">
+                                <button type="submit"
+                                    class="bg-red-100 text-red-600 lg:px-5 px-2 font-bold rounded-lg py-2 text-sm hover:bg-red-200 transition">
+                                    <i class="fa-solid fa-heart mr-2"></i> Disimpan
+                                </button>
+                            </form>
+                        @else
+                            {{-- Kalau belum favorit --}}
+                            <form action="{{ route('favorite.save') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="room_id" value="{{ $room->room_id }}">
+                                <button type="submit"
+                                    class="bg-base lg:px-5 px-2 font-bold rounded-lg py-2 text-primary text-sm hover:bg-primary/90 hover:text-white transition">
+                                    <i class="fa-regular fa-heart mr-2"></i> Simpan
+                                </button>
+                            </form>
+                        @endif
                     </div>
+
                 </div>
 
                 <div class="flex flex-col justify-between  space-y-3 mt-5">

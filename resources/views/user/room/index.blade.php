@@ -85,7 +85,7 @@
                     {{-- QR Code untuk check-in jika payment selesai dan kontrak initial --}}
                     @if ($paymentCompleted && $data->contract_type === 'initial')
                         <div class="text-center">
-                            {!! QrCode::size(100)->generate(route('user.contract.checkin', $data->contract_id)) !!}
+                            {!! QrCode::size(100)->generate(route('contract.checkin', $data->contract_id)) !!}
                             <p class="text-xs text-gray-500 mt-2">Scan QR untuk <br> check-in ke kamar kost.</p>
                         </div>
                     @endif
