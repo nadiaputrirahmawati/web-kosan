@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('room_id');
             $table->date('start_date');
             $table->date('end_date');
-            $table->enum('status', ['active', 'completed', 'cancelled']);
+            $table->enum('status', ['active', 'completed', 'cancelled', 'in_renewal', 'pending_payment']);
             $table->string('signature')->nullable();
             $table->bigInteger('deposit_amount')->nullable();
             $table->enum('verification_contract', ['pending', 'rejected', 'completed'])->nullable();

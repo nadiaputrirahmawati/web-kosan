@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('no_ktp')->unique()->m;
             $table->bigInteger('npwp')->nullable();
             $table->enum('gender', ['P', 'L'])->nullable();
+            $table->enum('work', ['bekerja', 'mahasiswa'])->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->text('address')->nullable();
             $table->enum('status', ['menikah', 'belum menikah'])->nullable();
@@ -28,9 +29,9 @@ return new class extends Migration
             $table->enum('status_verification', ['pending', 'verified', 'reject'])->nullable();
             $table->text('rejection_feedback')->nullable();
             $table->bigInteger('belance')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
             $table->enum('role', ['admin', 'owner', 'user'])->default('user');
+            $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

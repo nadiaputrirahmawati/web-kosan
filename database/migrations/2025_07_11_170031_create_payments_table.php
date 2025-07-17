@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'completed', 'failed']);
             $table->timestamp('payment_date')->nullable();
             $table->text('snap_token')->nullable();
-            $table->string('payment_token')->nullable();
+            $table->string('order_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');

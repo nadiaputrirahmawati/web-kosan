@@ -108,8 +108,9 @@
                 <select name="gender" id="gender"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-gray-800 focus:ring-1 focus:ring-gray-800 outline-none">
                     <option value="">Pilih Jenis Kelamin</option>
-                    <option value="L">Laki-laki</option>
-                    <option value="P">Perempuan</option>
+                    <option value="L" {{ Auth::user()->gender == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                    <option value="P" {{ Auth::user()->gender == 'P' ? 'selected' : '' }}>Perempuan</option>
+
                 </select>
             </div>
         </div>

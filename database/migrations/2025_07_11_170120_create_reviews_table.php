@@ -15,7 +15,6 @@ return new class extends Migration
             $table->uuid('review_id')->primary();
             $table->uuid('user_id');
             $table->uuid('room_id');
-            $table->unsignedTinyInteger('rating');
             $table->text('comment')->nullable();
             $table->timestamps();
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\Pemilik\RoomController;
 use App\Http\Controllers\Pemilik\GalleryController;
 use App\Http\Controllers\Pemilik\PemilikController;
 use App\Http\Controllers\Pemilik\ContractController;
+use App\Http\Controllers\Pemilik\ProfileController;
 
 // Owner routes - khusus untuk owner
 Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
@@ -36,7 +37,6 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
     // Route::get('room/gallery/{id}/edit', [GalleryController::class, 'edit'])->name('rooms.gallery.edit');
     Route::delete('room/gallery/{id}', [GalleryController::class, 'destroy'])->name('rooms.gallery.delete');
     // Route::put('room/gallery/{id}', [GalleryController::class, 'update'])->name('rooms.gallery.update');
-    
 
     // Verifikasi Kontrak
     Route::get('room/contract', [ContractController::class, 'index'])->name('rooms.contract.index');
@@ -52,5 +52,9 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
     //Checkin
     Route::post('/user/room/checkin', [ContractController::class, 'checkin'])->name('contract.checkin.save');
     Route::get('/user/room/checkin/{id}', [ContractController::class, 'getCheckin'])->name('contract.checkin');
+
+    // Profile
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
 });
