@@ -177,9 +177,9 @@ class PaymentController extends Controller
                 'phone' => Auth::user()->phone_number ?? null,
             ],
             'callbacks' => [
-                'finish' => 'http://127.0.0.1:8000/user/room/contract',
-                'unfinish' => 'https://large-tetra-basically.ngrok-free.app/order/payment/callback',
-                'error' => 'https://large-tetra-basically.ngrok-free.app/order/payment/callback',
+                'finish' => env('MIDTRANS_FINISH_URL'),
+                'unfinish' => env('MIDTRANS_FINISH_URL'),
+                'error' => env('MIDTRANS_FINISH_URL'),
             ]
         ];
 
