@@ -9,7 +9,7 @@
                             : asset('img/gambarkos.png');
                     @endphp
 
-                    <img id="preview-profile" src="{{ $profilePicture }}" class="w-16 h-16 rounded-full object-cover">
+                    <img src="{{ $profilePicture }}" class="w-16 h-16 rounded-full object-cover">
                 </div>
                 <h1 class="text-md font-semibold text-center text-sm">{{ Auth::user()->name }}</h1>
                 <div class="flex justify-center">
