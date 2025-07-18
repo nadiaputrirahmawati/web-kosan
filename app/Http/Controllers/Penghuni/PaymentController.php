@@ -17,6 +17,7 @@ class PaymentController extends Controller
     public function __construct()
     {
         MidtransConf::$serverKey = config('midtrans.server_key');
+        MidtransConf::$clientKey = config('midtrans.client_key');
         MidtransConf::$isProduction = config('midtrans.is_production');
         MidtransConf::$isSanitized = config('midtrans.is_sanitized');
         MidtransConf::$is3ds = config('midtrans.is_3ds');
@@ -69,9 +70,9 @@ class PaymentController extends Controller
                 'phone' => Auth::user()->phone_number ?? null,
             ],
             'callbacks' => [
-                'finish' => 'http://127.0.0.1:8000/user/room/contract',
-                'unfinish' => 'https://large-tetra-basically.ngrok-free.app/order/payment/callback',
-                'error' => 'https://large-tetra-basically.ngrok-free.app/order/payment/callback',
+                'finish' => env('MIDTRANS_FINISH_URL') ?? 'http://127.0.0.1:8000/user/room/contract',
+                'unfinish' => env('MIDTRANS_FINISH_URL'),
+                'error' => env('MIDTRANS_FINISH_URL'),
             ]
         ];
 
