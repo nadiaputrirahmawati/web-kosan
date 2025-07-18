@@ -1,4 +1,4 @@
-@extends('layout.landingpage')
+@extends('layout.Landingpage')
 @section('title', 'Home')
 @section('content')
     <section class="bg-white py-20">

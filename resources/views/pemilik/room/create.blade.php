@@ -1,4 +1,4 @@
-@extends('layout.pemilik')
+@extends('layout.Pemilik')
 
 @section('content')
     <h1 class="text-sm font-medium"><a href="/owner/room">Room /</a> <span class="font-bold"> Tambah Kamar</span></h1>

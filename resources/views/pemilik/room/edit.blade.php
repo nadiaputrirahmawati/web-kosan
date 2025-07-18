@@ -1,4 +1,4 @@
-@extends('layout.pemilik')
+@extends('layout.Pemilik')
 
 @section('content')
     <h1 class="text-sm font-medium">

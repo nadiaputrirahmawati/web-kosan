@@ -1,4 +1,4 @@
-@extends('layout.pemilik')
+@extends('layout.Pemilik')
 
 @section('content')
     <div class="flex lg:flex-row flex-col justify-between">

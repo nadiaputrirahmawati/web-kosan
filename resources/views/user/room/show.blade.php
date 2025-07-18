@@ -1,4 +1,4 @@
-@extends('layout.penghuni')
+@extends('layout.Penghuni')
 @section('content')
     <div class="flex justify-between">
         <div>

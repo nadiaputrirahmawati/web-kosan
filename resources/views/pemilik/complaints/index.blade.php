@@ -1,4 +1,4 @@
-@extends('layout.pemilik')
+@extends('layout.Pemilik')
 
 @section('content')
 <div class="container mx-auto px-4 py-6">

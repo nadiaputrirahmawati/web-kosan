@@ -1,4 +1,4 @@
-@extends('layout.landingpage')
+@extends('layout.Landingpage')
 
 @section('content')
     @if ($room->galleries->isNotEmpty())

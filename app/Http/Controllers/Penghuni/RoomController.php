@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\penghuni;
+namespace App\Http\Controllers\Penghuni;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contract;

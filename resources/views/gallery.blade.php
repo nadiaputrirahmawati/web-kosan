@@ -1,4 +1,4 @@
-@extends('layout.landingpage')
+@extends('layout.Landingpage')
 @section('content')
     <div class="p-6 w-full">
         <h1 class="text-lg font-medium"><a href="/user/room/{{ $room->first()->room_id }}/show">Detail Kost/</a> <span class="font-bold"> Gallery Kost</span></h1>
