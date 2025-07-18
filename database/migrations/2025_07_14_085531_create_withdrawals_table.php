@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('withdrawals', function (Blueprint $table) {
             $table->uuid('withdrawal_id')->primary();
             $table->uuid('owner_id');
-            $table->bigInteger('amount');
-            $table->string('proof');
-            $table->enum('status', ['pending', 'completed']);
+            $table->bigInteger('amount')->nullable();
+            $table->string('proof')->nullable();
+            $table->enum('status', ['pending', 'completed'])->nullable();
             $table->timestamps();
 
             $table->foreign('owner_id')->references('user_id')->on('users')->onDelete('cascade');
