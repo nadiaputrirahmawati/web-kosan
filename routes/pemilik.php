@@ -12,7 +12,9 @@ use App\Http\Controllers\Pemilik\ProfileController;
 
 // Owner routes - khusus untuk owner
 Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
-    Route::get('/kost', function () {
+
+    Route::middleware(['check-profile'])->group(function () {
+        Route::get('/kost', function () {
         return view('owner.kost');
     })->name('owner.properties');
     Route::get('/dashboard', [PemilikController::class, 'index'])->name('owner.dashboard');
@@ -41,6 +43,7 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
     // Verifikasi Kontrak
     Route::get('room/contract', [ContractController::class, 'index'])->name('rooms.contract.index');
     Route::get('room/contract/{id}/show', [ContractController::class, 'show']);
+    Route::get('room/contract/{id}/sewa', [ContractController::class, 'sewa'])->name('rooms.contract.show');
     Route::post('room/contract/{id}/verifikasi', [ContractController::class, 'verifikasi'])->name('rooms.contract.verifikasi');
     Route::put('room/contract/{id}/tolak', [ContractController::class, 'tolak'])->name('rooms.contract.reject');
 
@@ -52,9 +55,11 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
     //Checkin
     Route::post('/user/room/checkin', [ContractController::class, 'checkin'])->name('contract.checkin.save');
     Route::get('/user/room/checkin/{id}', [ContractController::class, 'getCheckin'])->name('contract.checkin');
+    });
 
     // Profile
-    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('profile', [ProfileController::class, 'index'])->name('owner.profile');
+    Route::get('profile/create', [ProfileController::class, 'create'])->name('owner.profile.create');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
 });

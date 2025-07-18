@@ -12,51 +12,10 @@
                 class="p-1 mr-5 -ml-2 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple">
                 <i class="fa-solid fa-bars text-2xl"></i>
             </button>
-            <!-- Profile menu -->
-            <ul class="flex items-center flex-shrink-0 space-x-6">
-                <li class="relative">
-                    <button @click="isProfileMenuOpen = !isProfileMenuOpen"
-                        class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
-                        aria-label="Account" aria-haspopup="true">
-                        <img class="object-cover w-8 h-8 rounded-full"
-                            src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
-                            alt="" aria-hidden="true" />
-                    </button>
-
-                    <!-- Dropdown -->
-                    <div x-show="isProfileMenuOpen" @click.outside="isProfileMenuOpen = false"
-                        class="absolute right-0 w-56 p-3 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-lg shadow-md "
-                        x-transition:enter="transition ease-out duration-150"
-                        x-transition:enter-start="opacity-0 transform scale-95"
-                        x-transition:enter-end="opacity-100 transform scale-100"
-                        x-transition:leave="transition ease-in duration-100"
-                        x-transition:leave-start="opacity-100 transform scale-100"
-                        x-transition:leave-end="opacity-0 transform scale-95">
-                        <div class="flex items-center space-x-2">
-                            <img class="object-cover w-10 h-10 rounded-full"
-                                src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
-                                alt="" aria-hidden="true" />
-                            <div>
-                                <h1 class="text-sm font-semibold"> Admin </h1>
-                                <h1 class="text-xs font-light"> admin@gmail.com</h1>
-                            </div>
-                        </div>
-
-                        <a href="#" class="flex items-center w-full px-1 py-1 text-sm pt-3">
-                            <i class="fas fa-user-circle mr-3 text-black font-medium"></i>
-                            <span class="tracking-wider  text-black font-medium"> View Profile</span>
-                        </a>
-                        <a href="#" class="flex items-center w-full px-1 py-1 text-sm">
-                            <i class="fas fa-sliders-h mr-3 text-black font-medium"></i>
-                            <span class="tracking-wider  text-black font-medium"> Account Settings </span>
-                        </a>
-                        <form method="POST" action="{{ route('logout') }}" class="inline">
-                            @csrf
-                            <button type="submit" class="text-sm text-red-600 hover:text-red-700">Logout</button>
-                        </form>
-                    </div>
-                </li>
-            </ul>
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+                @csrf
+                <button type="submit" class="text-sm text-red-600 hover:text-red-700 px-2 py-1 rounded-lg shadow bg-red-200"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </form>
         </div>
     </header>
 
@@ -71,48 +30,54 @@
         x-transition:leave-end="opacity-0 transform -translate-x-20">
 
         <div class="py-4 text-gray-500 dark:text-gray-400">
-            <div class="flex justify-center space-x-3 mt-4">
+            <div class="flex justify-center space-x-3 mt-1">
                 <a class=" text-2xl font-bold text-gray-800 " href="#">
-                    <img src="{{ asset('img/image.png') }}" alt="" class="w-12">
-                </a>
-                <a class=" text-2xl font-medium text-gray-800 mt-2 " href="#">
-                    Base
+                    <img src="{{ asset('img/simcard.png') }}" alt="" class="w-24">
                 </a>
             </div>
-            <div class="mt-10">
+            <div class="mt-3">
                 <ul class="mt-2">
-                    <li
-                        class="relative font-medium px-8 py-3  text-gray-600  tracking-wider  
-                        {{ request()->is('/') ? 'bg-gradient-to-r from-purple-100 to-transparent text-purple-600 font-semibold' : 'text-gray-600 hover:text-purple-600 hover:font-semibold' }}">
-                        <a class="flex items-center text-md  " href="{{ url('') }}">
+                    <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('admin/dashboard*') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold ' }}"
+                        :class="{ 'justify-center': isSidebarCollapsed }">
+                        <a class="flex items-center text-sm  " href="{{ url('/admin/dashboard') }}">
                             <i class="fa-solid fa-grid-2 text-xl"></i>
-                            <span class="ml-3 ">Dashboard</span>
+                            <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Dashboard</span>
                         </a>
                     </li>
-                    <li
-                        class="relative font-medium px-8 py-3 mt-2  text-gray-600  tracking-wider  
-                        {{ request()->is('/form') ? 'bg-gradient-to-r from-purple-100 to-transparent text-purple-600 font-semibold' : 'text-gray-600 hover:text-purple-600 hover:font-semibold' }}">
-                        <a class="flex items-center text-md  " href="{{ url('') }}">
-                            <i class="fa-light fa-grid-2-plus text-xl"></i>
-                            <span class="ml-3">Price</span>
-                        </a>
-                    </li>
-                    <li
-                        class="relative font-medium px-8 py-3 mt-2  text-gray-600  tracking-wider  
-                        {{ request()->is('/product') ? 'bg-gradient-to-r from-purple-100 to-transparent text-purple-600 font-semibold' : 'text-gray-600 hover:text-purple-600 hover:font-semibold' }}">
-                        <a class="flex items-center text-md  " href="{{ url('') }}">
-                            <i class="fa-solid fa-grid-2 text-xl"></i>
-                            <span class="ml-3 ">Grafik</span>
+                </ul>
+                {{-- <ul class="mt-2">
+                <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('owner/room') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary hover:font-semibold' }}"
+                    :class="{ 'justify-center': isSidebarCollapsed }">
+                    <a class="flex items-center text-sm  " href="{{ url('/owner/room') }}">
+                        <i class="fas fa-tags text-xl"></i>
+                        <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Room</span>
+                    </a>
+                </li>
+            </ul> --}}
+                {{-- <ul class="mt-2">
+                <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('/product') ? 'bg-gradient-to-r from-purple-100 to-transparent  font-semibold' : 'text-primary hover:font-semibold' }}"
+                    :class="{ 'justify-center': isSidebarCollapsed }">
+                    <a class="flex items-center text-sm  " href="{{ url('') }}">
+                        <i class="fa-solid fa-chart-simple text-xl"></i>
+                        <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Management Penghuni</span>
+                    </a>
+                </li>
+            </ul> --}}
+                <ul class="mt-2">
+                    <li class="relative font-medium py-3 px-7 flex items-center gap-3 {{ request()->is('admin/withdrawals*') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold ' }}"
+                        :class="{ 'justify-center': isSidebarCollapsed }">
+                        <a class="flex items-center text-sm  " href="{{ url('admin/withdrawals') }}">
+                            <i class="fas fa-cubes text-xl"></i>
+                            <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Pendapatan</span>
                         </a>
                     </li>
                 </ul>
                 <ul class="mt-2">
-                    <li
-                        class="relative font-medium px-8 py-3  text-gray-600  tracking-wider  
-                        {{ request()->is('/typo') ? 'bg-gradient-to-r from-purple-100 to-transparent text-purple-600 font-semibold' : 'text-gray-600 hover:text-purple-600 hover:font-semibold' }}">
-                        <a class="flex items-center text-md  " href="{{ url('') }}">
-                            <i class="fa-regular fa-box"></i>
-                            <span class="ml-3">Product</span>
+                    <li class="relative font-medium py-3 px-7 flex items-center gap-3 {{ request()->is('admin/user-management*') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold' }}"
+                        :class="{ 'justify-center': isSidebarCollapsed }">
+                        <a class="flex items-center text-sm  " href="{{ url('admin/user-management') }}">
+                            <i class="fas fa-user text-xl"></i>
+                            <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">User Management</span>
                         </a>
                     </li>
                 </ul>

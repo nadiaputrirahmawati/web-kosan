@@ -53,17 +53,17 @@ class LoginUserController extends Controller
         // Redirect berdasarkan role
         switch ($user->role) {
             case 'admin':
-                return redirect()->route('admin.dashboard')
-                    ->with('success', 'Welcome back, Admin!');
+                notyf()->success('Welcome back, Admin!');
+                return redirect()->route('admin.dashboard');
 
             case 'owner':
-                return redirect()->route('owner.dashboard')
-                    ->with('success', 'Welcome back, Owner!');
+                notyf()->success('Welcome back, Owner!');
+                return redirect()->route('owner.dashboard');
 
             case 'user':
             default:
-                return redirect()->route('user.dashboard')
-                    ->with('success', 'Welcome back!');
+                notyf()->success('Welcome back, User!');
+                return redirect()->route('user.dashboard');
         }
     }
 }

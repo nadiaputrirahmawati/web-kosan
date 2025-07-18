@@ -19,8 +19,9 @@
                         class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
                         aria-label="Account" aria-haspopup="true">
                         <img class="object-cover w-8 h-8 rounded-full"
-                            src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
-                            alt="" aria-hidden="true" />
+                            src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=0D8ABC&color=fff&size=128' }}"
+                            alt="Foto Profil">
+
                     </button>
 
                     <!-- Dropdown -->
@@ -33,20 +34,21 @@
                         x-transition:leave-start="opacity-100 transform scale-100"
                         x-transition:leave-end="opacity-0 transform scale-95">
                         <div class="flex items-center space-x-2">
-                            <img class="object-cover w-10 h-10 rounded-full"
-                                src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
-                                alt="" aria-hidden="true" />
+                            <img class="object-cover w-8 h-8 rounded-full"
+                                src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=0D8ABC&color=fff&size=128' }}"
+                                alt="Foto Profil">
                             <div>
-                                <h1 class="text-sm font-semibold"> Admin </h1>
-                                <h1 class="text-xs font-light"> admin@gmail.com</h1>
+                                <h1 class="text-sm font-semibold"> {{ Auth::user()->name }} </h1>
+                                <h1 class="text-xs font-light"> {{ Auth::user()->email }}</h1>
                             </div>
                         </div>
 
-                        <a href="#" class="flex items-center w-full px-1 py-1 text-sm pt-3">
+                        <a href="{{ route('profile.update') }}" class="flex items-center w-full px-1 py-1 text-sm pt-3">
                             <i class="fas fa-user-circle mr-3 text-black font-medium"></i>
                             <span class="tracking-wider  text-black font-medium"> View Profile</span>
                         </a>
-                        <a href="#" class="flex items-center w-full px-1 py-1 text-sm">
+                        <a href="{{ route('owner.profile.create', Auth::user()->id) }}"
+                            class="flex items-center w-full px-1 py-1 text-sm">
                             <i class="fas fa-sliders-h mr-3 text-black font-medium"></i>
                             <span class="tracking-wider  text-black font-medium"> Account Settings </span>
                         </a>
@@ -71,48 +73,52 @@
         x-transition:leave-end="opacity-0 transform -translate-x-20">
 
         <div class="py-4 text-gray-500 dark:text-gray-400">
-            <div class="flex justify-center space-x-3 mt-4">
-                <a class=" text-2xl font-bold text-gray-800 " href="#">
-                    <img src="{{ asset('img/image.png') }}" alt="" class="w-12">
-                </a>
-                <a class=" text-2xl font-medium text-gray-800 mt-2 " href="#">
-                    Base
-                </a>
+            <div class="flex items-center justify-center space-x-3 mt-4">
+                <img src="{{ asset('img/simcard.png') }}" alt="" class="w-[120px]">
             </div>
-            <div class="mt-10">
+            <div class="mt-3">
                 <ul class="mt-2">
-                    <li
-                        class="relative font-medium px-8 py-3  text-gray-600  tracking-wider  
-                        {{ request()->is('/') ? 'bg-gradient-to-r from-purple-100 to-transparent text-purple-600 font-semibold' : 'text-gray-600 hover:text-purple-600 hover:font-semibold' }}">
-                        <a class="flex items-center text-md  " href="{{ url('') }}">
+                    <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('owner/dashboard') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold ' }}"
+                        :class="{ 'justify-center': isSidebarCollapsed }">
+                        <a class="flex items-center text-sm  " href="{{ url('/owner/dashboard') }}">
                             <i class="fa-solid fa-grid-2 text-xl"></i>
-                            <span class="ml-3 ">Dashboard</span>
-                        </a>
-                    </li>
-                    <li
-                        class="relative font-medium px-8 py-3 mt-2  text-gray-600  tracking-wider  
-                        {{ request()->is('/form') ? 'bg-gradient-to-r from-purple-100 to-transparent text-purple-600 font-semibold' : 'text-gray-600 hover:text-purple-600 hover:font-semibold' }}">
-                        <a class="flex items-center text-md  " href="{{ url('') }}">
-                            <i class="fa-light fa-grid-2-plus text-xl"></i>
-                            <span class="ml-3">Price</span>
-                        </a>
-                    </li>
-                    <li
-                        class="relative font-medium px-8 py-3 mt-2  text-gray-600  tracking-wider  
-                        {{ request()->is('/product') ? 'bg-gradient-to-r from-purple-100 to-transparent text-purple-600 font-semibold' : 'text-gray-600 hover:text-purple-600 hover:font-semibold' }}">
-                        <a class="flex items-center text-md  " href="{{ url('') }}">
-                            <i class="fa-solid fa-grid-2 text-xl"></i>
-                            <span class="ml-3 ">Grafik</span>
+                            <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Dashboard</span>
                         </a>
                     </li>
                 </ul>
                 <ul class="mt-2">
-                    <li
-                        class="relative font-medium px-8 py-3  text-gray-600  tracking-wider  
-                        {{ request()->is('/typo') ? 'bg-gradient-to-r from-purple-100 to-transparent text-purple-600 font-semibold' : 'text-gray-600 hover:text-purple-600 hover:font-semibold' }}">
-                        <a class="flex items-center text-md  " href="{{ url('') }}">
-                            <i class="fa-regular fa-box"></i>
-                            <span class="ml-3">Product</span>
+                    <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('owner/room') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary hover:font-semibold' }}"
+                        :class="{ 'justify-center': isSidebarCollapsed }">
+                        <a class="flex items-center text-sm  " href="{{ url('/owner/room') }}">
+                            <i class="fas fa-tags text-xl"></i>
+                            <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Kost</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="mt-2">
+                    <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('owner/room/contract') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary hover:font-semibold' }}"
+                        :class="{ 'justify-center': isSidebarCollapsed }">
+                        <a class="flex items-center text-sm  " href="{{ url('/owner/room/contract') }}">
+                            <i class="fa-solid fa-chart-simple text-xl"></i>
+                            <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Management Penghuni</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="mt-2">
+                    <li class="relative font-medium py-3 px-7 flex items-center gap-3 {{ request()->is('owner/withdrawals*') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold' }}"
+                        :class="{ 'justify-center': isSidebarCollapsed }">
+                        <a class="flex items-center text-sm" href="{{ url('owner/withdrawals') }}">
+                            <i class="fas fa-cubes text-xl"></i>
+                            <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Pendapatan</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="mt-2">
+                    <li class="relative font-medium py-3 px-7 flex items-center gap-3 {{ request()->is('owner/complaints*') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold' }}"
+                        :class="{ 'justify-center': isSidebarCollapsed }">
+                        <a class="flex items-center text-sm" href="{{ url('owner/complaints') }}">
+                            <i class="fas fa-comments text-xl"></i>
+                            <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Komplain</span>
                         </a>
                     </li>
                 </ul>

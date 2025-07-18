@@ -9,9 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+   
     public function index()
     {
-        return view('pemilik.profile');
+        return view('pemilik.profile.index');
+    }
+    public function create()
+    {
+        return view('pemilik.profile.profile');
     }
 
     public function update(Request $request)
@@ -28,6 +33,8 @@ class ProfileController extends Controller
             'tgl_lahir' => 'required|date',
             'address' => 'required|string',
             'no_npwp' => 'nullable|max:16|min:16',
+            'bank' => 'nullable|string',
+            'no_rekening' => 'nullable|string',
             'phone_number' => 'required|string|max:20',
             'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'ktp_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
@@ -55,6 +62,6 @@ class ProfileController extends Controller
         $user->update($validated);
 
         notyf()->success('Your profile has been updated.');
-        return redirect()->back();
+        return redirect()->route('owner.profile');
     }
 }

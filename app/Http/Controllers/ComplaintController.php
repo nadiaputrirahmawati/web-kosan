@@ -42,8 +42,8 @@ class ComplaintController extends Controller
         $complaint->status = $request->status;
         $complaint->complaint_feedback = $request->complaint_feedback;
         $complaint->save();
-
-        return redirect()->route('owner.complaints.index')->with('success', 'Status keluhan berhasil diperbarui.');
+        notyf()->success('Keluhan berhasil diperbarui');
+        return redirect()->route('owner.complaints.index');
     }
 
 
@@ -53,7 +53,7 @@ class ComplaintController extends Controller
     {
         $user = Auth::user();
 
-        $complaints = \App\Models\Complaint::where('user_id', $user->user_id)
+        $complaints = Complaint::where('user_id', $user->user_id)
             ->with('room')
             ->latest()
             ->get();
@@ -71,7 +71,7 @@ class ComplaintController extends Controller
                 ->from('contracts')
                 ->where('user_id', $user->user_id)
                 ->where('status', 'active');
-        })->get();
+        })->first();
 
         return view('user.complaints.create', compact('rooms'));
     }
@@ -102,6 +102,7 @@ class ComplaintController extends Controller
             'status' => 'sent_in',
         ]);
 
-        return redirect()->route('user.complaints.index')->with('success', 'Keluhan berhasil dikirim.');
+        notyf()->success('Keluhan berhasil dikirim');
+        return redirect()->route('user.complaints.index');  
     }
 }

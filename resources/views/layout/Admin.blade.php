@@ -26,7 +26,7 @@
         @include('partials.SidebarAdmin')
         <div class="flex flex-col flex-1 w-full">
             @include('partials.NavbarAdmin')
-            <main class="h-full overflow-y-auto  p-6 bg-slate-50">
+            <main class="h-full overflow-y-auto lg:p-6 p-2  bg-slate-50">
                     @yield('content')
             </main>
         </div>

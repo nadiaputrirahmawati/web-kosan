@@ -3,11 +3,7 @@
     <div class="py-2 h-full overflow-y-auto bg-white  text-gray-500 dark:text-gray-400">
         <div class="flex items-center justify-center space-x-3 mt-4">
             <img src="{{ asset('img/simcard.png') }}" alt="" class="w-[120px]">
-            {{-- <span x-show="!isSidebarCollapsed" class="text-2xl font-medium text-gray-800">Base</span> --}}
         </div>
-        {{-- <div class="flex justify-center mt-2">
-            <h1 x-show="isSidebarCollapsed" class="text-2xl font-medium text-gray-800">Base</h1>
-        </div> --}}
         <div class="mt-3">
             <ul class="mt-2">
                 <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('owner/dashboard') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold ' }}"

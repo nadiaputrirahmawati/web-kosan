@@ -15,7 +15,7 @@ return new class extends Migration
            $table->uuid('user_id')->primary();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('no_ktp')->unique()->m;
+            $table->string('no_ktp')->unique()->nullable();
             $table->bigInteger('npwp')->nullable();
             $table->enum('gender', ['P', 'L'])->nullable();
             $table->enum('work', ['bekerja', 'mahasiswa'])->nullable();
@@ -23,12 +23,14 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->enum('status', ['menikah', 'belum menikah'])->nullable();
             $table->string('phone_number')->nullable();
+            $table->string('no_rekening')->nullable();
+            $table->string('bank')->nullable();
             $table->string('profile_picture')->nullable();
             $table->string('ktp_picture')->nullable();
             $table->string('ktp_picture_person')->nullable();
             $table->enum('status_verification', ['pending', 'verified', 'reject'])->nullable();
             $table->text('rejection_feedback')->nullable();
-            $table->bigInteger('belance')->nullable();
+            $table->bigInteger('balance')->nullable();
             $table->enum('role', ['admin', 'owner', 'user'])->default('user');
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();

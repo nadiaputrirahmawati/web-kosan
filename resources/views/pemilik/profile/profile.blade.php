@@ -104,16 +104,44 @@
             {{-- {No Npwp} --}}
             <div class="flex w-full mb-4">
                 <div class="w-4/12 mt-2">
-                    <label for="no_ktp" class="text-sm font-semibold text-gray-700">No. NPWP</label>
+                    <label for="npwp" class="text-sm font-semibold text-gray-700">No. NPWP</label>
                 </div>
                 <div
                     class="flex items-center border border-gray-300 rounded-lg px-3 py-2 w-8/12 bg-white mt-2 
-                focus-within:border-gray-800 focus-within:ring-1 focus-within:ring-gray-800 transition-colors duration-200">
-                    <i class="fa-light fa-id-card mr-2"></i>
-                    <input type="text" name="npwp" id="no_ktp" placeholder="1245xxxxxxxxxxxx"
+        focus-within:border-gray-800 focus-within:ring-1 focus-within:ring-gray-800 transition-colors duration-200">
+                    <i class="fa-light fa-file-invoice-dollar mr-2"></i>
+                    <input type="text" name="npwp" id="npwp" placeholder="1245xxxxxxxxxxxx" min="16"
                         class="w-full outline-none text-sm" value="{{ Auth::user()->npwp }}" />
                 </div>
             </div>
+
+            <div class="flex w-full mb-4">
+                <div class="w-4/12 mt-2">
+                    <label for="bank" class="text-sm font-semibold text-gray-700">Bank</label>
+                </div>
+                <div
+                    class="flex items-center border border-gray-300 rounded-lg px-3 py-2 w-8/12 bg-white mt-2 
+        focus-within:border-gray-800 focus-within:ring-1 focus-within:ring-gray-800 transition-colors duration-200">
+                    <i class="fa-light fa-building-columns mr-2"></i>
+                    <input type="text" name="bank" id="bank" placeholder="BCA"
+                        class="w-full outline-none text-sm" value="{{ Auth::user()->bank }}" />
+                </div>
+            </div>
+
+            <div class="flex w-full mb-4">
+                <div class="w-4/12 mt-2">
+                    <label for="no_rekening" class="text-sm font-semibold text-gray-700">No. Rekening</label>
+                </div>
+                <div
+                    class="flex items-center border border-gray-300 rounded-lg px-3 py-2 w-8/12 bg-white mt-2 
+        focus-within:border-gray-800 focus-within:ring-1 focus-within:ring-gray-800 transition-colors duration-200">
+                    <i class="fa-light fa-credit-card mr-2"></i>
+                    <input type="text" name="no_rekening" id="no_rekening" placeholder="789xxxxxx" min="16"
+                        class="w-full outline-none text-sm" value="{{ Auth::user()->no_rekening }}" />
+                </div>
+            </div>
+
+
 
             {{-- Jenis Kelamin --}}
             <div class="flex w-full mb-4">

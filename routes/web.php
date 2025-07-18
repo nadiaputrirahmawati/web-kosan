@@ -22,7 +22,7 @@ Route::get('/user/room/{id}/gallery', [LandingPageController::class, 'gallery'])
 
 // Admin routes - khusus untuk mengelola user dan owner
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::resource('user-management', UserManagementController::class);
     Route::get('withdrawals', [WithdrawalController::class, 'index'])->name('withdrawals.index');
     Route::get('withdrawals/{id}/show', [WithdrawalController::class, 'show'])->name('withdrawals.show');

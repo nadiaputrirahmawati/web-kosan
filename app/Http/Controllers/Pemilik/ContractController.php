@@ -15,22 +15,42 @@ class ContractController extends Controller
             'user',           // penyewa
             'room.galleries'  // kamar + semua foto galerinya
         ])->whereHas('room', function ($query) {
-                $query->where('owner_id', Auth::user()->user_id);
-            })
+            $query->where('owner_id', Auth::user()->user_id);
+        })->where('contract_type', 'initial')
             ->latest()
             ->get();
 
         return view('pemilik.contract.index', compact('contracts'));
     }
 
+    public function sewa($id)
+    {
+        $contract = Contract::with([
+            'user',
+            'room.galleries'
+        ])->whereHas('room', function ($query) {
+            $query->where('owner_id', Auth::user()->user_id);
+        })
+            ->where('user_id', $id)
+            ->firstOrFail();
+        $data = Contract::with([
+            'user',
+            'room.galleries'
+        ])->whereHas('room', function ($query) {
+            $query->where('owner_id', Auth::user()->user_id);
+        })
+            ->where('user_id', $id)
+            ->get();
+        return view('pemilik.contract.sewa', compact('contract', 'data'));
+    }
     public function show($id)
     {
         $contract = Contract::with([
             'user',
             'room.galleries'
         ])->whereHas('room', function ($query) {
-                $query->where('owner_id', Auth::user()->user_id);
-            })
+            $query->where('owner_id', Auth::user()->user_id);
+        })
             ->where('user_id', $id)
             ->firstOrFail();
         return view('pemilik.contract.show', compact('contract'));

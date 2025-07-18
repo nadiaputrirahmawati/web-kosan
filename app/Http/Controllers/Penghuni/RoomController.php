@@ -23,17 +23,6 @@ class RoomController extends Controller
                 // ->where('start_date', '>', $room->end_date)
                 // ->whereHas('payment', fn($q) => $q->where('status', 'completed'))
                 ->exists();
-        // dd($kontrak);
-
-        // Loop setiap kontrak dan tandai apakah sudah diperpanjang
-        // foreach ($room as $contract) {
-        //     $contract->has_extended = Contract::where('user_id', $contract->user_id)
-        //         ->where('room_id', $contract->room_id)
-        //         ->where('contract_type', 'renewal')
-        //         ->where('start_date', '>', $contract->end_date)
-        //         ->whereHas('payment', fn($q) => $q->where('status', 'completed'))
-        //         ->exists();
-        // }
 
         return view('user.room.index', compact('room', 'kontrak'));
     }
@@ -43,7 +32,6 @@ class RoomController extends Controller
     {
         $room = Contract::with(['room.owner', 'payment'])
             ->where('contract_id', $id)
-            ->whereHas('payment', fn($q) => $q->where('status', 'completed'))
             ->latest()
             ->first();
         // dd($room);
@@ -51,7 +39,7 @@ class RoomController extends Controller
             return view('user.room.index')->with('message', 'Belum ada kontrak aktif');
         }
 
-        $checkInUrl = route('user.contract.checkin', $room->contract_id);
+        $checkInUrl = route('contract.checkin', $room->contract_id);
         $qrCode     = QrCode::size(100)->generate($checkInUrl);
         return view('user.room.show', compact('room', 'qrCode'));
     }
@@ -70,7 +58,7 @@ class RoomController extends Controller
     public function downloadPDF(Contract $contract)
     {
         $contract->load(['user', 'room']);
-        $checkInUrl = route('user.contract.checkin', $contract->contract_id);
+        $checkInUrl = route('contract.checkin', $contract->contract_id);
 
         $svg = QrCode::format('svg')->size(100)->generate($checkInUrl);
         $qrCodeBase64 = 'data:image/svg+xml;base64,' . base64_encode($svg);

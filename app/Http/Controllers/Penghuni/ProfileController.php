@@ -27,6 +27,7 @@ class ProfileController extends Controller
             'gender' => 'required|in:L,P',
             'tgl_lahir' => 'required|date',
             'address' => 'required|string',
+            'work' => 'required|in:bekerja,mahasiswa',
             'status' => 'required|in:Menikah,Belum Menikah',
             'phone_number' => 'required|string|max:20',
 

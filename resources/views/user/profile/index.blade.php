@@ -127,18 +127,6 @@
             </div>
         </div>
 
-        {{-- Alamat --}}
-        <div class="flex w-full mb-4">
-            <div class="w-4/12 mt-2">
-                <label for="address" class="text-sm font-semibold text-gray-700">Alamat</label>
-            </div>
-            <div class="w-8/12 mt-2">
-                <textarea name="address" id="address" rows="3"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-gray-800 focus:ring-1 focus:ring-gray-800 outline-none"
-                    placeholder="Masukkan alamat lengkap"> {{ Auth::user()->address }}</textarea>
-            </div>
-        </div>
-
         {{-- Status --}}
         <div class="flex w-full mb-4">
             <div class="w-4/12 mt-2">
@@ -154,6 +142,20 @@
             </div>
         </div>
 
+        <div class="flex w-full mb-4">
+            <div class="w-4/12 mt-2">
+                <label for="status" class="text-sm font-semibold text-gray-700">Pekerjaan</label>
+            </div>
+            <div class="w-8/12 mt-2">
+                <select name="work" id="status"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-gray-800 focus:ring-1 focus:ring-gray-800 outline-none">
+                    <option value="">Pilih Status</option>
+                    <option value="bekerja">Bekerja</option>
+                    <option value="mahasiswa">Mahasiswa</option>
+                </select>
+            </div>
+        </div>
+
         {{-- No HP --}}
         <div class="flex w-full mb-4">
             <div class="w-4/12 mt-2">
@@ -165,6 +167,18 @@
                 <i class="fa-light fa-phone mr-2"></i>
                 <input type="text" name="phone_number" id="phone" placeholder="08xxxxxxxxxx"
                     class="w-full outline-none text-sm" value="{{ Auth::user()->phone_number }}" />
+            </div>
+        </div>
+
+        {{-- Alamat --}}
+        <div class="flex w-full mb-4">
+            <div class="w-4/12 mt-2">
+                <label for="address" class="text-sm font-semibold text-gray-700">Alamat</label>
+            </div>
+            <div class="w-8/12 mt-2">
+                <textarea name="address" id="address" rows="3"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:border-gray-800 focus:ring-1 focus:ring-gray-800 outline-none"
+                    placeholder="Masukkan alamat lengkap"> {{ Auth::user()->address }}</textarea>
             </div>
         </div>
 

@@ -2,23 +2,28 @@
 @section('content')
     <div class="flex justify-between">
         <div>
-            <h1 class="text-sm font-medium"><a href="/owner/room">Kamar /</a> <span class="font-bold">Detail Kamar</span></h1>
+            <h1 class="text-sm font-medium text-primary"><a href="/owner/room">Kamar /</a> <span class="font-bold">Detail Kamar</span></h1>
             <h1 class="text-primary font-extrabold text-xl mb-4">Detail Kamar Kos</h1>
         </div>
-        <div class="flex space-x-3 mt-3 mb-3">
-            <a href="{{ route('user.contract.download', $room->contract_id) }}"
-                class="bg-red-400 lg:px-3 px-2 font-bold rounded-full py-2  text-white text-sm">
-                Download Surat Kontrak Sewa
-            </a>
+        <div class="flex space-x-3 mt-3 mb-4">
+            @if ($room->payment->status === 'completed')
+                <a href="{{ route('user.contract.download', $room->contract_id) }}"
+                    class="bg-red-400 lg:px-3 px-2 font-bold rounded-full py-2  text-white text-sm">
+                    Download Surat Kontrak Sewa
+                </a>
+            @else
+                <h1></h1>
+            @endif
+
         </div>
     </div>
 
     <div class="w-full bg-white shadow-sm rounded-xl p-5">
         {{-- Info Kamar & Galeri --}}
         <h1 class="text-sm font-semibold text-gray-800 mt-2">Informasi Kamar Saya</h1>
-        <div class="flex mt-2 justify-between">
-            <div>
-                <div class="flex space-x-4">
+        <div class="flex mt-2 justify-between w-full">
+            <div class="w-8/12">
+                <div class="grid grid-cols-4 gap-2">
                     @forelse ($room->room->galleries as $gallery)
                         <img src="{{ asset('storage/' . $gallery->image_url) }}" class="w-40 h-32 object-cover rounded"
                             alt="Foto Kamar">
@@ -32,14 +37,22 @@
             </div>
 
             {{-- QR Code --}}
-            <div class="text-center">
-                <div class="flex justify-center">
-                    {!! $qrCode !!}
+            @if ($room->payment->status === 'completed')
+                <div class="text-center w-4/12">
+                    <div class="flex justify-center">
+                        {!! $qrCode !!}
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">
+                        Scan QR ini untuk melakukan<br>check‑in ke kamar kost.
+                    </p>
                 </div>
-                <p class="text-xs text-gray-500 mt-2">
-                    Scan QR ini untuk melakukan<br>check‑in ke kamar kost.
-                </p>
-            </div>
+            @else
+                <div class="text-center w-4/12">
+                    <p class="text-xs text-gray-500 mt-24">
+                        Silahkan melakukan pembayaran untuk<br>melakukan check-in ke kamar kost.
+                    </p>
+                </div>
+            @endif
         </div>
         <div class="flex flex-col justify-between mt-3 space-y-4">
             {{-- Status --}}

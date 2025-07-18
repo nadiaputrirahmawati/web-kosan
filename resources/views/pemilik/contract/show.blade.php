@@ -63,13 +63,13 @@
                 <div class="w-6/12">
                     <h1 class="font-bold text-sm mb-2">Foto Ktp</h1>
                     <img src="{{ $contract->user->ktp_picture ? asset('storage/' . $contract->user->ktp_picture) : asset('img/gambarkos.png') }}"
-                        alt="KTP" class="w-full object-cover rounded">
+                        alt="KTP" class="w-40 object-cover rounded">
 
                 </div>
                 <div class="w-6/12">
                     <h1 class="font-bold text-sm mb-2"> Foto Data Diri</h1>
                     <img src="{{ $contract->user->ktp_picture_person ? asset('storage/' . $contract->user->ktp_picture_person) : asset('img/gambarkos.png') }}"
-                        alt="KTP" class="w-full object-cover rounded">
+                        alt="KTP" class="w-40 object-cover rounded">
                 </div>
             </div>
         </div>
@@ -152,7 +152,7 @@
                             {{ number_format($contract->deposit_amount + $contract->room->price, 0, ',', '.') }}</span>
                     </h1>
                 </div>
-                <div class="flex mt-6">
+                <div class="flex mt-2">
                     <!-- Tombol Verifikasi -->
 
                     @if ($contract->verification_contract === 'pending')

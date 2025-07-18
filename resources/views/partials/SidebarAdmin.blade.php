@@ -18,7 +18,7 @@
                     </a>
                 </li>
             </ul>
-            <ul class="mt-2">
+            {{-- <ul class="mt-2">
                 <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('owner/room') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary hover:font-semibold' }}"
                     :class="{ 'justify-center': isSidebarCollapsed }">
                     <a class="flex items-center text-sm  " href="{{ url('/owner/room') }}">
@@ -26,8 +26,8 @@
                         <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Room</span>
                     </a>
                 </li>
-            </ul>
-            <ul class="mt-2">
+            </ul> --}}
+            {{-- <ul class="mt-2">
                 <li class="relative font-medium py-3 px-7 flex items-center gap-3  {{ request()->is('/product') ? 'bg-gradient-to-r from-purple-100 to-transparent  font-semibold' : 'text-primary hover:font-semibold' }}"
                     :class="{ 'justify-center': isSidebarCollapsed }">
                     <a class="flex items-center text-sm  " href="{{ url('') }}">
@@ -35,7 +35,7 @@
                         <span x-show="!isSidebarCollapsed" class="whitespace-nowrap ml-4">Management Penghuni</span>
                     </a>
                 </li>
-            </ul>
+            </ul> --}}
             <ul class="mt-2">
                 <li class="relative font-medium py-3 px-7 flex items-center gap-3 {{ request()->is('admin/withdrawals*') ? 'bg-gradient-to-r from-primary to-secondary text-white font-semibold' : 'text-primary font-semibold ' }}"
                     :class="{ 'justify-center': isSidebarCollapsed }">

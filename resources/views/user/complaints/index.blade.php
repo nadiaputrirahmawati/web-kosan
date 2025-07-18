@@ -3,8 +3,8 @@
 @section('content')
 <div class="container mx-auto px-4 py-6">
     <div class="flex items-center justify-between mb-6">
-        <h1 class="text-3xl font-semibold text-primary">Riwayat Keluhan</h1>
-        <a href="{{ route('user.complaints.create') }}" class="bg-primary text-quinary px-4 py-2 rounded-md hover:bg-primary/80 transition-all duration-300">
+        <h1 class="text-xl font-semibold text-primary">Riwayat Keluhan</h1>
+        <a href="{{ route('user.complaints.create') }}" class="bg-primary text-quinary px-4 py-1 rounded-md hover:bg-primary/80 transition-all duration-300">
             + Ajukan Keluhan
         </a>
     </div>

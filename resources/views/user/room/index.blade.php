@@ -93,26 +93,9 @@
 
                 {{-- Tombol Aksi --}}
                 @if ($data->status === 'pending_payment' && $data->verification_contract === 'completed')
-                    @if ($data->signature)
-                        <div class="flex justify-end mt-8 text-end">
-                            <div>
-                                <h1>Jumlah Yang Harus Dibayar:
-                                    <strong>Rp{{ number_format($data->room->price, 0, ',', '.') }}</strong>
-                                </h1>
-                                <form action="{{ route('user.contract.payment') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="contract_id" value="{{ $data->contract_id }}">
-                                    <button type="submit" class="bg-primary text-white font-bold px-4 py-2 mt-4 rounded-md">
-                                        Bayar Kost
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    @else
-                        <p class="text-red-500 mt-4 font-semibold">Anda harus menandatangani kontrak sebelum membayar.
-                            <a href="{{ route('user.contract') }}" class="text-primary">Klik Disini</a>
-                        </p>
-                    @endif
+                    <p class="text-red-500 mt-4 font-semibold">Anda harus menandatangani kontrak sebelum membayar.
+                        <a href="{{ route('user.contract') }}" class="text-primary">Klik Disini</a>
+                    </p>
                 @elseif ($data->status === 'pending_payment')
                     <h1 class="text-end text-red-500 mt-4">Menunggu Verifikasi Kontrak oleh Pemilik Kost</h1>
                 @endif
@@ -139,7 +122,7 @@
                 @endif
             </div>
         @else
-        <h1 class="font-bold text-center text-red-500">Belum ada Kamar</h1>
+            <h1 class="font-bold text-center text-red-500">Belum ada Kamar</h1>
         @endif
     @empty
         <div class="flex justify-center mt-10">

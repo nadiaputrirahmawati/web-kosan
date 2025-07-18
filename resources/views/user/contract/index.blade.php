@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <h1 class="font-bold">{{ $data->room->name }}</h1>
+                        <h1 class="font-bold">{{ Str::limit($data->room->name, 50)  }}</h1>
                         <h1 class="capitalize text-sm font-semibold mt-2"><i class="fa-light fa-users mr-1"></i>
                             {{ $data->user->name }}</h1>
                     </div>
@@ -80,7 +80,7 @@
                                 Lakukan Pengajuan Kamar Baru</span>
                         </p>
                     </div>
-                @elseif($data->status === 'completed' || $data->contract_type === 'initial' && $data->signature !== null && $data->payment->status === 'completed')
+                @elseif($data->status === 'completed' || $data->contract_type === 'initial' && $data->signature !== null && $data->payment?->status === 'completed')
                     <div class="mt-2 p-3 bg-yellow-50 border border-yellow-600 rounded-lg ">
                         <p>
                             Yeay! Selamat datang di kos kami! 🎉 Terima kasih Telah memilih kami. Jangan lupa datang H-1
@@ -128,7 +128,7 @@
                 </div>
             @endif
 
-            @if ($data->payment?->status == 'pending')
+            @if (empty($data->payment->status) && $data->verification_contract == 'completed' && $data->signature !== null)
                 <div class="flex justify-end space-x-3 mt-5">
                     <div>
                         <form action="{{ route('user.contract.signature.reject', $data->contract_id) }}" method="post">
