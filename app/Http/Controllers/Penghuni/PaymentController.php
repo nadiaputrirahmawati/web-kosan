@@ -70,7 +70,7 @@ class PaymentController extends Controller
                 'phone' => Auth::user()->phone_number ?? null,
             ],
             'callbacks' => [
-                'finish' => env('MIDTRANS_FINISH_URL') ?? 'http://127.0.0.1:8000/user/room/contract',
+                'finish' => env('MIDTRANS_FINISH_URL'),
                 'unfinish' => env('MIDTRANS_FINISH_URL'),
                 'error' => env('MIDTRANS_FINISH_URL'),
             ]
