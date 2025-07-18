@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\penghuni\RoomController;
-use App\Http\Controllers\penghuni\PaymentController;
+use App\Http\Controllers\Penghuni\RoomController;
+use App\Http\Controllers\Penghuni\PaymentController;
 use App\Http\Controllers\Penghuni\ProfileController;
 use App\Http\Controllers\Penghuni\ContractController;
 use App\Http\Controllers\Penghuni\FavoriteController;
