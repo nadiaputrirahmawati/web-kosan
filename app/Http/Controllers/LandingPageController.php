@@ -35,4 +35,14 @@ class LandingPageController extends Controller
         // dd($room);
         return view('gallery', compact('room'));
     }
+
+    public function sewa() {
+        return view('carasewa');
+    }
+    public function panduan() {
+        return view('tentang');
+    }
+    public function bantuan() {
+        return view('pusatbantuan');
+    }
 }
