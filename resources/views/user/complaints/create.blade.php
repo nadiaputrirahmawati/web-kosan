@@ -18,10 +18,10 @@
         <form action="{{ route('user.complaints.store') }}" method="POST">
             @csrf
 
-            <input type="hidden" name="room_id" value="{{ $rooms->room_id }}">
+            <input type="hidden" name="room_id" value="{{ $room->room_id }}">
             <div class="mb-4">
                 <label for="room_id" class="block text-secondary font-semibold mb-2">Kamar</label>
-                <h1>{{ $rooms->name }}</h1>
+                <h1>{{ $room->name }}</h1>
             </div>
 
             <div class="mb-4">

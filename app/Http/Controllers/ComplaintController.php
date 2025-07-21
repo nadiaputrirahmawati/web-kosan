@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use App\Models\Rooms;
+use App\Models\Contract;
 use App\Models\Complaint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,16 +65,21 @@ class ComplaintController extends Controller
     public function create()
     {
         $user = Auth::user();
-
-        // Ambil kamar dari kontrak aktif milik user
-        $rooms = Rooms::whereIn('room_id', function ($query) use ($user) {
-            $query->select('room_id')
-                ->from('contracts')
-                ->where('user_id', $user->user_id)
-                ->where('status', 'active');
-        })->first();
-
-        return view('user.complaints.create', compact('rooms'));
+    
+        // Ambil kontrak aktif milik user
+        $contract = Contract::where('user_id', $user->user_id)
+            ->where('status', 'active')
+            ->first();
+    
+        // Ambil kamar jika kontraknya ada
+        $room = $contract ? Rooms::where('room_id', $contract->room_id)->first() : null;
+    
+        if (!$room) {
+            notyf()->info('Anda harus memiliki kontrak aktif untuk membuat keluhan.');
+            return redirect()->route('user.room');   
+        }
+    
+        return view('user.complaints.create', compact('room'));
     }
 
     public function store(Request $request)

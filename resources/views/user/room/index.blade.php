@@ -78,6 +78,11 @@
                                     <i class="fa-regular fa-info-circle mr-1"></i>
                                     <strong>Menunggu Pembayaran</strong>
                                 </h1>
+                            @elseif ($data->status === 'completed')
+                                <h1 class="text-sm mt-2 text-blue-500">
+                                    <i class="fa-regular fa-info-circle mr-1"></i>
+                                    <strong>Silahkan Check-in Kamar menggunakan QR Code</strong>
+                                </h1>   
                             @endif
                         </div>
                     </div>
