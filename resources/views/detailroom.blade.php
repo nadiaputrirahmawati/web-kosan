@@ -9,14 +9,14 @@
         @endphp
 
         <div class="p-5" x-data="{ activeImage: '{{ $firstImage }}' }">
-            <div class="flex">
+            <div class="flex lg:flex-row flex-col">
                 {{-- Gambar Utama --}}
-                <div class="w-8/12">
+                <div class="lg:w-8/12 w-full">
                     <img :src="activeImage" class="w-full h-96 object-cover rounded-xl" alt="Foto Utama">
                 </div>
 
                 {{-- Thumbnail --}}
-                <div class="w-4/12 pl-4 flex flex-col space-y-2 max-h-96 overflow-y-auto">
+                <div class="lg:w-4/12 w-full pl-4 flex lg:flex-col lg:space-x-0 space-x-2 flex-row space-y-2 max-h-96 overflow-y-auto">
                     @foreach ($thumbnails as $gallery)
                         @php
                             $imageUrl = asset('storage/' . $gallery->image_url);
@@ -39,9 +39,9 @@
         </div>
     @endif
 
-    <div class="flex space-x-3 w-full">
+    <div class="flex lg:flex-row flex-col lg:space-x-3 space-x-0 w-full">
         {{-- Kiri: Konten Detail Kamar --}}
-        <div class="w-7/12 overflow-y-auto">
+        <div class="lg:w-7/12 w-full overflow-y-auto">
             {{-- Detail Kamar --}}
             <div class=" p-6 mt-4">
                 <h1 class="text-3xl font-bold mt-1">{{ $room->name }}</h1>
@@ -157,7 +157,7 @@
         </div>
 
         {{-- Kanan: Sticky Informasi Kamar --}}
-        <div class="w-5/12 mt-5">
+        <div class="lg:w-5/12 w-full mt-5">
             <div class="bg-white shadow rounded-lg p-5 sticky top-24">
                 @if (session('error'))
                     <div class="mb-4">

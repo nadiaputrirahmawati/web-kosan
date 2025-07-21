@@ -42,7 +42,7 @@
                 <hr class="mb-3">
 
                 {{-- Konten --}}
-                <div class="flex justify-between">
+                <div class="flex flex-col md:flex-row justify-between">
                     <div class="flex space-x-3">
                         <div>
                             @if ($data->room->galleries->isNotEmpty())
@@ -84,12 +84,15 @@
 
                     {{-- QR Code untuk check-in jika payment selesai dan kontrak initial --}}
                     @if ($paymentCompleted && $data->contract_type === 'initial')
-                        <div class="text-center">
-                            {!! QrCode::size(100)->generate(route('contract.checkin', $data->contract_id)) !!}
+                        <div class="text-center md:ml-4 mt-5  md:mt-0">
+                            <div class="flex justify-center">
+                                {!! QrCode::size(100)->generate(route('contract.checkin', $data->contract_id)) !!}
+                            </div>
                             <p class="text-xs text-gray-500 mt-2">Scan QR untuk <br> check-in ke kamar kost.</p>
                         </div>
                     @endif
                 </div>
+
 
                 {{-- Tombol Aksi --}}
                 @if ($data->status === 'pending_payment' && $data->verification_contract === 'completed')

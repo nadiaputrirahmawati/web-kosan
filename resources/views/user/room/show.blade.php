@@ -1,11 +1,11 @@
 @extends('layout.Penghuni')
 @section('content')
-    <div class="flex justify-between">
+    <div class="flex lg:flex-row flex-col justify-between">
         <div>
             <h1 class="text-sm font-medium text-primary"><a href="/owner/room">Kamar /</a> <span class="font-bold">Detail Kamar</span></h1>
             <h1 class="text-primary font-extrabold text-xl mb-4">Detail Kamar Kos</h1>
         </div>
-        <div class="flex space-x-3 mt-3 mb-4">
+        <div class="flex justify-end lg:space-x-3 space-x-0 lg:mt-3 mt-0 mb-4">
             @if ($room->payment->status === 'completed')
                 <a href="{{ route('user.contract.download', $room->contract_id) }}"
                     class="bg-red-400 lg:px-3 px-2 font-bold rounded-full py-2  text-white text-sm">
@@ -14,16 +14,15 @@
             @else
                 <h1></h1>
             @endif
-
         </div>
     </div>
 
     <div class="w-full bg-white shadow-sm rounded-xl p-5">
         {{-- Info Kamar & Galeri --}}
         <h1 class="text-sm font-semibold text-gray-800 mt-2">Informasi Kamar Saya</h1>
-        <div class="flex mt-2 justify-between w-full">
-            <div class="w-8/12">
-                <div class="grid grid-cols-4 gap-2">
+        <div class="flex lg:flex-row flex-col mt-2 justify-between w-full">
+            <div class="lg:w-8/12 w-full">
+                <div class="grid lg:grid-cols-4 grid-cols-3 gap-2">
                     @forelse ($room->room->galleries as $gallery)
                         <img src="{{ asset('storage/' . $gallery->image_url) }}" class="w-40 h-32 object-cover rounded"
                             alt="Foto Kamar">
@@ -38,7 +37,7 @@
 
             {{-- QR Code --}}
             @if ($room->payment->status === 'completed')
-                <div class="text-center w-4/12">
+                <div class="text-center lg:w-4/12 w-full lg:mt-5 mt-0 ">
                     <div class="flex justify-center">
                         {!! $qrCode !!}
                     </div>
