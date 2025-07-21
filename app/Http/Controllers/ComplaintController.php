@@ -74,7 +74,7 @@ class ComplaintController extends Controller
         // Ambil kamar jika kontraknya ada
         $room = $contract ? Rooms::where('room_id', $contract->room_id)->first() : null;
     
-        if ($room) {
+        if (!$room) {
             notyf()->info('Anda harus memiliki kontrak aktif untuk membuat keluhan.');
             return redirect()->route('user.room');   
         }
