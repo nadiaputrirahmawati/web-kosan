@@ -1,22 +1,42 @@
 @extends('layout.LandingPage')
-@section('title', 'Home')
 @section('content')
-    <section class="bg-white py-20">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-4">Manage Finance More Easily</h1>
-            <p class="text-lg text-gray-600 mb-6">Help you fulfill all aspirations in life. One platform to manage your
-                finance easily.</p>
-            <div class="flex justify-center space-x-4">
-                <a href="#"
-                    class="bg-green-600 text-white px-6 py-3 rounded-md font-medium hover:bg-green-700 transition">Download
-                    Now</a>
-                <a href="#" class="text-green-600 font-medium hover:underline">See how it works</a>
+    <section class="bg-white py-4">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col-reverse lg:flex-row items-center">
+            <!-- Kiri: Teks -->
+            <div class="w-full lg:w-1/2 text-center lg:text-left mt-10 lg:mt-0">
+                <h1
+                    class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-4 tracking-wider lg:leading-tight leading-10">
+                    Find Trusted Boarding Houses Easily
+                </h1>
+                <h1 class="text-2xl font-extrabold text-secondary mb-4 tracking-wide ">No agents, no hassle — just
+                    kost.</h1>
+                <p class="text-lg text-gray-600 mb-6">
+                    Discover your ideal place to stay — safe, fast, and convenient. One platform to search and rent kost
+                    with ease.
+                </p>
+                <div class="flex justify-center lg:justify-start space-x-4">
+                    <a href="#"
+                        class="bg-primary text-white px-6 py-3 rounded-xl font-medium hover:bg-green-700 transition">
+                        Find a Kost Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Kanan: Gambar -->
+            <div class="w-full lg:w-1/2 flex justify-center">
+                <img src="{{ asset('img/bg-1.png') }}" alt="Aplikasi Kost" class="max-w-xs md:max-w-sm lg:max-w-md">
             </div>
         </div>
     </section>
 
-    <section class="py-16 p-3 bg-white">
-        <div class="w-full grid grid-cols-4 gap-4">
+
+    <section class="py-10 px-4">
+        <div class="max-w-7xl mx-auto text-center mb-10">
+            <h2 class="text-3xl font-extrabold text-gray-800">Yuk Cari Kost di Sekitarmu!</h2>
+            <p class="text-gray-600 mt-2 text-sm">Temukan kamar kost terbaik sesuai lokasi, harga, dan fasilitas favoritmu.
+            </p>
+        </div>
+        <div class="w-full grid lg:grid-cols-4 grid-cols-1 gap-4">
             @forelse ($room as $data)
                 <a href="{{ route('user.rooms.show', $data->room_id) }}">
                     <div class="p-2 rounded-xl">

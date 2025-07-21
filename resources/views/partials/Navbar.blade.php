@@ -18,19 +18,19 @@
                 <a href="/"
                     class="nav-link text-sm hover:text-green-600 {{ request()->is('/') ? 'text-primary font-bold' : '' }}">Cari
                     Kos ?</a>
-                <a href="/pricing"
-                    class="nav-link text-sm hover:text-primary {{ request()->is('pricing') ? 'text-primary font-bold' : '' }}">Cara
+                <a href="/sewa"
+                    class="nav-link text-sm hover:text-primary {{ request()->is('sewa') ? 'text-primary font-bold' : '' }}">Cara
                     Sewa</a>
-                <a href="/faqs"
-                    class="nav-link text-sm hover:text-primary {{ request()->is('faqs') ? 'text-primary font-bold' : '' }}">Tentang</a>
-                <a href="/solutions"
-                    class="nav-link text-sm hover:text-primary {{ request()->is('solutions') ? 'text-primary font-bold' : '' }}">Pusat
+                <a href="/tentang"
+                    class="nav-link text-sm hover:text-primary {{ request()->is('tentang') ? 'text-primary font-bold' : '' }}">Tentang</a>
+                <a href="/bantuan"
+                    class="nav-link text-sm hover:text-primary {{ request()->is('bantuan') ? 'text-primary font-bold' : '' }}">Pusat
                     Bantuan</a>
             </div>
 
             <!-- Desktop Profile -->
             <div class="hidden md:flex space-x-3 items-center">
-                @if (Auth::check())
+                @auth
                     <div class="relative">
                         <button @click="isProfileMenuOpen = !isProfileMenuOpen" class="focus:outline-none">
                             <img class="w-8 h-8 rounded-full object-cover"
@@ -38,8 +38,8 @@
                                 alt="Profile" />
                         </button>
                         <div x-show="isProfileMenuOpen" @click.outside="isProfileMenuOpen = false"
-                            class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-md z-50 p-3"
-                            x-transition x-cloak>
+                            class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-md z-50 p-3" x-transition
+                            x-cloak>
                             <div class="flex items-center space-x-2">
                                 <img class="w-10 h-10 rounded-full object-cover"
                                     src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}"
@@ -49,9 +49,12 @@
                                     <h1 class="text-xs text-gray-500">{{ Auth::user()->email }}</h1>
                                 </div>
                             </div>
-                            <a href="{{ route('user.profile.update') }}" class="block text-sm pt-3"><i class="fa-light fa-user mr-3"></i>View Profile</a>
-                            <a href="{{ route('user.room') }}" class="block text-sm mt-2"><i class="fa-light fa-door-open mr-3"></i>Kos Saya</a>
-                            <a href="{{ route('user.favorite') }}" class="block text-sm mt-2"><i class="fa-light fa-heart mr-3"></i>Kost Tersimpan</a>
+                            <a href="{{ route('user.profile.update') }}" class="block text-sm pt-3"><i
+                                    class="fa-light fa-user mr-3"></i>View Profile</a>
+                            <a href="{{ route('user.room') }}" class="block text-sm mt-2"><i
+                                    class="fa-light fa-door-open mr-3"></i>Kos Saya</a>
+                            <a href="{{ route('user.favorite') }}" class="block text-sm mt-2"><i
+                                    class="fa-light fa-heart mr-3"></i>Kost Tersimpan</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
@@ -59,18 +62,17 @@
                             </form>
                         </div>
                     </div>
-                @else
+                @endauth
+                @guest
                     <button @click="isLoginModalOpen = true"
                         class="text-sm text-gray-700 hover:underline border-2 border-primary px-4 rounded-lg py-2">Log
                         In</button>
-
                     <button @click="isRegisterModalOpen = true"
-                        class="text-sm text-white bg-primary border border-primary px-4 rounded-lg py-2">Sign
-                        Up</button>
-                @endif
+                        class="text-sm text-white bg-primary border border-primary px-4 rounded-lg py-2">Sign Up</button>
+                @endguest
             </div>
 
-            <!-- Mobile Hamburger + Profile -->
+            <!-- Mobile Hamburger + Optional Profile -->
             <div class="md:hidden flex items-center space-x-4 ml-auto">
                 <!-- Hamburger -->
                 <button @click="isMobileMenuOpen = !isMobileMenuOpen" class="text-gray-700 focus:outline-none">
@@ -86,19 +88,17 @@
                     </svg>
                 </button>
 
-                <!-- Profile Button -->
-                @if (Auth::check())
+                <!-- Profile (mobile) -->
+                @auth
                     <div class="relative">
                         <button @click="isProfileMenuOpen = !isProfileMenuOpen" class="focus:outline-none">
                             <img class="w-8 h-8 rounded-full object-cover"
                                 src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}"
                                 alt="Profile">
                         </button>
-
-                        <!-- Dropdown Profile -->
                         <div x-show="isProfileMenuOpen" @click.outside="isProfileMenuOpen = false"
-                            class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-md z-50 p-3"
-                            x-transition x-cloak>
+                            class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-md z-50 p-3" x-transition
+                            x-cloak>
                             <div class="flex items-center space-x-2">
                                 <img class="w-10 h-10 rounded-full object-cover"
                                     src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}"
@@ -108,49 +108,54 @@
                                     <h1 class="text-xs text-gray-500">{{ Auth::user()->email }}</h1>
                                 </div>
                             </div>
-                            <a href="#" class="block text-sm pt-3"><i class="fa-light fa-user mr-2"></i> View Profile</a>
-                            <a href="#" class="block text-sm">Account Settings</a>
+                            <a href="{{ route('user.profile.update') }}" class="block text-sm pt-3">View Profile</a>
+                            <a href="{{ route('user.room') }}" class="block text-sm mt-2">Kos Saya</a>
+                            <a href="{{ route('user.favorite') }}" class="block text-sm mt-2">Kost Tersimpan</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit"
-                                    class="text-sm text-red-600 hover:text-red-700 mt-2">Logout</button>
+                                <button type="submit" class="text-sm text-red-600 hover:text-red-700 mt-2">Logout</button>
                             </form>
                         </div>
                     </div>
-                @endif
+                @endauth
             </div>
         </div>
 
         <!-- Mobile Menu -->
         <div x-show="isMobileMenuOpen" class="md:hidden absolute top-16 left-0 w-full bg-white shadow-md border-t z-40"
             x-cloak x-transition>
-            <div class="p-4 space-y-2">
+            <div class="p-4 space-y-3">
                 <a href="/" class="block text-sm {{ request()->is('/') ? 'text-primary font-bold' : '' }}">Cari
-                    Kos
-                    ?</a>
-                <a href="/pricing"
-                    class="block text-sm {{ request()->is('pricing') ? 'text-primary font-bold' : '' }}">Cara Sewa</a>
-                <a href="/faqs"
-                    class="block text-sm {{ request()->is('faqs') ? 'text-primary font-bold' : '' }}">Tentang</a>
-                <a href="/solutions"
-                    class="block text-sm {{ request()->is('solutions') ? 'text-primary font-bold' : '' }}">Pusat
+                    Kos ?</a>
+                <a href="/sewa"
+                    class="block text-sm {{ request()->is('sewa') ? 'text-primary font-bold' : '' }}">Cara Sewa</a>
+                <a href="/tentang"
+                    class="block text-sm {{ request()->is('tentang') ? 'text-primary font-bold' : '' }}">Tentang</a>
+                <a href="/bantuan"
+                    class="block text-sm {{ request()->is('bantuan') ? 'text-primary font-bold' : '' }}">Pusat
                     Bantuan</a>
+
+                @guest
+                    <button @click="isLoginModalOpen = true"
+                        class="text-sm text-gray-700 hover:underline border-2 border-primary px-4 rounded-lg py-2">Log
+                        In</button>
+                    <button @click="isRegisterModalOpen = true"
+                        class="text-sm text-white bg-primary border border-primary px-4 rounded-lg py-2">Sign Up</button>
+                @endguest
             </div>
         </div>
     </nav>
 
+    <!-- Login Modal -->
     <div x-show="isLoginModalOpen" x-transition x-cloak
         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
         <div @click.outside="isLoginModalOpen = false" class="bg-white w-96 p-6 rounded-lg shadow-lg">
-            {{-- <div class="flex justify-end text-end"> --}}
-            <button @click="isLoginModalOpen = false"
-                class="w-full text-sm text-gray-600 hover:underline text-end"><i
+            <button @click="isLoginModalOpen = false" class="w-full text-sm text-gray-600 hover:underline text-end"><i
                     class="fa-solid fa-xmark-large"></i></button>
-            {{-- </div> --}}
-            <h2 class="text-xl font-semibold mb-4 text-center"> Silahkan Login </h2>
+            <h2 class="text-xl font-semibold mb-4 text-center">Silahkan Login</h2>
             <div class="space-y-3">
                 <div class="bg-white p-2 shadow">
-                    <a href="/user/login" class="">
+                    <a href="/user/login">
                         <div class="flex">
                             <img src="{{ asset('img/1.png') }}" alt="" class="w-16">
                             <h1 class="mt-5 font-semibold">Masuk Sebagai Penghuni Kost</h1>
@@ -158,7 +163,7 @@
                     </a>
                 </div>
                 <div class="bg-white p-2 shadow">
-                    <a href="/owner/login" class="">
+                    <a href="/owner/login">
                         <div class="flex">
                             <img src="{{ asset('img/5.png') }}" alt="" class="w-16">
                             <h1 class="mt-5 font-semibold">Masuk Sebagai Pemilik Kost</h1>
@@ -166,31 +171,31 @@
                     </a>
                 </div>
             </div>
-
         </div>
     </div>
 
+    <!-- Register Modal -->
     <div x-show="isRegisterModalOpen" x-transition x-cloak
         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
         <div @click.outside="isRegisterModalOpen = false" class="bg-white w-96 p-6 rounded-lg shadow-lg">
-            <button  @click="isRegisterModalOpen = false"
-                class=" w-full text-sm text-gray-600 hover:underline text-end"><i
+            <button @click="isRegisterModalOpen = false"
+                class="w-full text-sm text-gray-600 hover:underline text-end"><i
                     class="fa-solid fa-xmark-large"></i></button>
-            <h2 class="text-xl font-semibold mb-4 text-center"> Silahkan Register </h2>
+            <h2 class="text-xl font-semibold mb-4 text-center">Silahkan Register</h2>
             <div class="space-y-3">
                 <div class="bg-white p-2 shadow">
-                    <a href="/user/register" class="">
+                    <a href="/user/register">
                         <div class="flex">
                             <img src="{{ asset('img/1.png') }}" alt="" class="w-16">
-                            <h1 class="mt-5 font-semibold">Masuk Sebagai Penghuni Kost</h1>
+                            <h1 class="mt-5 font-semibold">Daftar Sebagai Penghuni Kost</h1>
                         </div>
                     </a>
                 </div>
                 <div class="bg-white p-2 shadow">
-                    <a href="/owner/register" class="">
+                    <a href="/owner/register">
                         <div class="flex">
                             <img src="{{ asset('img/5.png') }}" alt="" class="w-16">
-                            <h1 class="mt-5 font-semibold">Masuk Sebagai Pemilik Kost</h1>
+                            <h1 class="mt-5 font-semibold">Daftar Sebagai Pemilik Kost</h1>
                         </div>
                     </a>
                 </div>
