@@ -90,13 +90,13 @@ class RoomController extends Controller
             'type'              => 'required|in:campur,putri,putra',
             'deposit_amount'    => 'nullable|numeric|min:0',
             'room_facility'     => 'nullable|array',
-            'room_facility.*'   => 'string|max:255',
+            // 'room_facility.*'   => 'string|max:255',
             'public_facility'   => 'nullable|array',
-            'public_facility.*' => 'string|max:255',
+            // 'public_facility.*' => 'string|max:255',
             'address'           => 'required|string|max:255',
             'description'       => 'nullable|string',
             'regulation'        => 'nullable|array',
-            'regulation.*'      => 'string|max:255',
+            // 'regulation.*'      => 'string|max:255',
         ]);
 
         // 2) Ambil data kamar
